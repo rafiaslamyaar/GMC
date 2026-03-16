@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Mark Cox - Personal Trainer Amsterdam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <img src="logo.png" alt="Mark Cox Training">
+        </div>
+        <div class="logo-text">
+          <span class="brand">MARK COX</span>
+          <span class="tagline">Personal Training</span>
+        </div>
+      </a>
+      
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="booking.html" class="btn-primary">Book Now</a>
+      </nav>
+      
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section style="padding: 8rem 0 4rem; background-color: #111111; margin-top: 72px;">
+    <div class="container">
+      <div class="hero-label">
+        <span>About Mark</span>
+      </div>
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; margin-bottom: 1rem;">
+        YOUR COACH,<br>
+        YOUR <span class="highlight">CHAMPION</span>
+      </h1>
+      <p style="color: rgba(255, 255, 255, 0.5); max-width: 700px; font-size: 1.05rem; line-height: 1.7;">
+        15 years of transforming lives through expert personal training, 
+        science-backed methods, and unwavering commitment to each client's success.
+      </p>
+    </div>
+  </section>
+
+  <!-- Bio Section -->
+  <section style="background-color: #0c0c0c;">
+    <div class="container">
+      <div class="grid grid-2" style="gap: 4rem; align-items: center;">
+        <div>
+          <img src="https://images.unsplash.com/photo-1669504243706-1df1f8d5dacd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" 
+               alt="Mark Cox" 
+               style="width: 100%; border-radius: 1rem; aspect-ratio: 4/5; object-fit: cover;">
+        </div>
+        <div>
+          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem;">
+            Passion Meets <span class="highlight">Expertise</span>
+          </h2>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.8;">
+            Mark Cox began his fitness journey over 15 years ago with a simple goal: 
+            to help people unlock their potential. What started as a passion quickly became a calling.
+          </p>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.8;">
+            Based in Amsterdam, Mark has worked with over 500 clients — from beginners taking their 
+            first steps to elite athletes pushing their limits. His approach combines cutting-edge 
+            sports science with genuine care for each individual's journey.
+          </p>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem; line-height: 1.8;">
+            Mark believes that fitness isn't just about physical transformation — it's about 
+            building confidence, discipline, and a lifestyle that supports your biggest goals.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section style="background-color: #111111;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">My Philosophy</div>
+        <h2>CORE <span class="highlight">VALUES</span></h2>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Results-Driven</h3>
+          <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.7;">
+            Every program is designed with your specific goals in mind. No cookie-cutter plans — 
+            just proven strategies tailored to you.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔬</div>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Science-Backed</h3>
+          <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.7;">
+            Training methods grounded in the latest sports science and nutrition research. 
+            Smart training gets better results.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div style="font-size: 2.5rem; margin-bottom: 1rem;">💪</div>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Holistic Approach</h3>
+          <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.7;">
+            Fitness, nutrition, mindset, and recovery — all working together to create 
+            sustainable, long-term transformation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section style="background-color: #0c0c0c;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Credentials</div>
+        <h2>CERTIFICATIONS & <span class="highlight">EXPERTISE</span></h2>
+      </div>
+      
+      <div style="max-width: 900px; margin: 0 auto;">
+        <div class="grid grid-2">
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🏆</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">NASM Certified Personal Trainer</h4>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
+              National Academy of Sports Medicine
+            </p>
+          </div>
+          
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🥗</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Sports Nutrition Specialist</h4>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
+              Precision Nutrition Level 1
+            </p>
+          </div>
+          
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">💪</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Strength & Conditioning</h4>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
+              CSCS Certified
+            </p>
+          </div>
+          
+          <div class="card" style="text-align: center; padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🩺</div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Rehabilitation Training</h4>
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
+              Injury Prevention & Recovery
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="stats" style="padding: 6rem 0;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.25rem;">
+          READY TO WORK TOGETHER?
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; margin-bottom: 2.5rem;">
+          Let's build something great. Book your free consultation and discover what you're truly capable of.
+        </p>
+        <a href="booking.html" class="btn" style="background-color: white; color: #e8580a;">
+          BOOK FREE CONSULTATION →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+            <div class="logo-icon">
+              <img src="logo.png" alt="Mark Cox Training">
+            </div>
+            <div class="logo-text">
+              <span class="brand">MARK COX TRAINING</span>
+            </div>
+          </a>
+          <p style="margin-top: 1rem;">
+            Professional personal training in the Netherlands. Transforming bodies and minds since 2010.
+          </p>
+        </div>
+        
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Mark</a></li>
+            <li><a href="services.html">Training Programs</a></li>
+            <li><a href="booking.html">Book a Session</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>📞 +31 6 12 34 56 78</li>
+            <li>✉️ info@markcoxtraining.nl</li>
+            <li>📍 Amsterdam, Netherlands</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2026 Mark Cox Training. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
