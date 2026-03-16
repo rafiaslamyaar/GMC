@@ -1,3 +1,8 @@
+
+<?php
+include "includes/header.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,32 +15,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="navbar">
-      <a href="index.html" class="logo">
-        <div class="logo-icon">
-          
-          <img src="images/markcox-logo.png" alt="Mark Cox Training">
-        </div>
-        <div class="logo-text">
-          <span class="brand">MARK COX</span>
-          <span class="tagline">Personal Training</span>
-        </div>
-      </a>
-      
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/services.html">Services</a>
-        <a href="pages/booking.html" class="btn-primary">Book Now</a>
-      </nav>
-      
-      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
+ 
   <section class="hero">
     <div class="hero-bg">
       <img src="https://images.unsplash.com/photo-1745329532608-bbda3b742e00?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Personal Training">
@@ -205,53 +185,11 @@
   </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
-            <div class="logo-icon">
-              <img src="logo.png" alt="Mark Cox Training">
-            </div>
-            <div class="logo-text">
-              <span class="brand">MARK COX TRAINING</span>
-            </div>
-          </a>
-          <p style="margin-top: 1rem;">
-            Professional personal training in the Netherlands. Transforming bodies and minds since 2010.
-          </p>
-          <div class="social-links">
-            <a href="#" class="social-link">📷</a>
-            <a href="#" class="social-link">👍</a>
-          </div>
-        </div>
-        
-        <div>
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Mark</a></li>
-            <li><a href="services.html">Training Programs</a></li>
-            <li><a href="booking.html">Book a Session</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4>Contact</h4>
-          <ul>
-            <li>📞 +31 6 12 34 56 78</li>
-            <li>✉️ info@markcoxtraining.nl</li>
-            <li>📍 Amsterdam, Netherlands</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>© 2026 Mark Cox Training. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+  
 
   <script src="main.js"></script>
 </body>
 </html>
+<?php
+include 'includes/footer.php';
+?>
