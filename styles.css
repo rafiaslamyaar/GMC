@@ -361,7 +361,7 @@ section h2 .highlight {
 }
 
 .grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* Card */
@@ -420,10 +420,23 @@ footer {
   margin-bottom: 0.75rem;
 }
 
+.quick-links h4 {
+  margin-bottom: 1rem;
+  
+}
+.quick-links ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.489);
+}
+.quick-links ul li a:hover {
+  color: #e8580a;
+}
+
 .social-links {
   display: flex;
   gap: 1rem;
   margin-top: 1.25rem;
+  text-decoration: none ;
 }
 
 .social-link {
@@ -439,6 +452,17 @@ footer {
 
 .social-link:hover {
   background-color: #e8580a;
+}
+
+.text-footer {
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.505);
+
+}
+.contact ul li {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.875rem;
+  line-height: 1.8;
 }
 
 .footer-bottom {

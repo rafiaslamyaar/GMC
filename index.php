@@ -18,16 +18,14 @@ include "includes/header.php";
  
   <section class="hero">
     <div class="hero-bg">
-      <img src="https://images.unsplash.com/photo-1745329532608-bbda3b742e00?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Personal Training">
+      <img src="images/markcox-background.webp" alt="Personal Training">
       <div class="hero-overlay"></div>
       <div class="hero-overlay-bottom"></div>
     </div>
     
     <div class="container">
       <div class="hero-content">
-        <div class="hero-label">
-          <span>Amsterdam's #1 Personal Trainer</span>
-        </div>
+        
         <h1>
           TRAIN WITH<br>
           <span class="highlight">PURPOSE.</span><br>
@@ -40,7 +38,7 @@ include "includes/header.php";
         </p>
         <div class="hero-buttons">
           <a href="pages/booking.html" class="btn btn-primary">
-            BOOK FREE CONSULTATION →
+            BOOK CONSULTATION →
           </a>
           <a href="pages/services.html" class="btn btn-secondary">
             VIEW PROGRAMS
@@ -79,7 +77,7 @@ include "includes/header.php";
     <div class="container">
       <div class="grid grid-2" style="gap: 4rem; align-items: center;">
         <div>
-          <img src="https://images.unsplash.com/photo-1669504243706-1df1f8d5dacd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" 
+          <img src="images/markcox-image.webp" 
                alt="Mark Cox" 
                style="width: 100%; border-radius: 1rem; aspect-ratio: 4/5; object-fit: cover;">
         </div>
@@ -120,10 +118,10 @@ include "includes/header.php";
       
       <div class="grid grid-3">
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1745329532608-bbda3b742e00?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
+          <img src="images/duo-training.webp" 
                alt="Personal Training" 
                style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Personal Training</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Personal Training/ Duo Training</h3>
           <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">
             1-on-1 sessions tailored to your goals, fitness level and schedule.
           </p>
@@ -133,30 +131,19 @@ include "includes/header.php";
         </div>
         
         <div class="card">
-          <img src="https://images.unsplash.com/photo-1761684887056-f76bdb852d89?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
+          <img src="images/groep.webp"     
                alt="Outdoor Bootcamp" 
                style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Outdoor Bootcamp</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Groep Training</h3>
           <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">
-            High-energy group sessions in Amsterdam's parks. Fun, challenging and effective.
+            High-energy group sessions that make fitness fun and social.
           </p>
           <a href="services.html" style="color: #e8580a; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
             Learn More →
           </a>
         </div>
         
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1621758745802-6c16a087ca32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" 
-               alt="Nutrition Coaching" 
-               style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Nutrition Coaching</h3>
-          <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">
-            Custom meal plans and nutritional guidance to fuel your transformation.
-          </p>
-          <a href="services.html" style="color: #e8580a; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
-            Learn More →
-          </a>
-        </div>
+        
       </div>
       
       <div class="text-center" style="margin-top: 2.5rem;">
