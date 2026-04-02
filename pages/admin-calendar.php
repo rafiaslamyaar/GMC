@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Calendar - Mark Cox Training</title>
+  <title>Admin Kalender - Mark Cox Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -86,9 +86,9 @@
       
       <nav>
         <a href="../index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="booking.html" class="btn-primary">Book Now</a>
+        <a href="about.html">Over</a>
+        <a href="services.html">Diensten</a>
+        <a href="booking.html" class="btn-primary">Boek nu</a>
       </nav>
       
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
@@ -99,9 +99,9 @@
   <div id="pinContainer" class="pin-container">
     <div class="card">
       <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">🔒</h2>
-      <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">TRAINER ACCESS</h1>
+      <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">TRAINERTOEGANG</h1>
       <p style="color: rgba(255, 255, 255, 0.5); margin-bottom: 2rem;">
-        Enter your PIN to manage blocked dates
+        Voer je PIN in om ongebruikte datums te beheren
       </p>
       
       <input 
@@ -114,7 +114,7 @@
       >
       
       <button onclick="checkPin()" class="btn btn-primary" style="width: 100%;">
-        UNLOCK
+        ONTGRENDELEN
       </button>
       
       <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.75rem; margin-top: 1.5rem;">
@@ -128,14 +128,14 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
       <div>
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">
-          ADMIN <span class="highlight">CALENDAR</span>
+          ADMIN <span class="highlight">KALENDER</span>
         </h1>
         <p style="color: rgba(255, 255, 255, 0.5);">
-          Block dates when you're unavailable
+          Blokkeer datums wanneer je niet beschikbaar bent
         </p>
       </div>
       <button onclick="logout()" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">
-        LOGOUT
+        UITLOGGEN
       </button>
     </div>
     
@@ -143,18 +143,18 @@
     <div class="calendar">
       <div class="calendar-header">
         <button class="calendar-nav-btn" onclick="previousMonth()">‹</button>
-        <div class="calendar-title" id="monthTitle">January 2026</div>
+        <div class="calendar-title" id="monthTitle">januari 2026</div>
         <button class="calendar-nav-btn" onclick="nextMonth()">›</button>
       </div>
       
       <div class="calendar-weekdays">
-        <div class="calendar-weekday">Mon</div>
-        <div class="calendar-weekday">Tue</div>
-        <div class="calendar-weekday">Wed</div>
-        <div class="calendar-weekday">Thu</div>
-        <div class="calendar-weekday">Fri</div>
-        <div class="calendar-weekday">Sat</div>
-        <div class="calendar-weekday">Sun</div>
+        <div class="calendar-weekday">Ma</div>
+        <div class="calendar-weekday">Di</div>
+        <div class="calendar-weekday">Wo</div>
+        <div class="calendar-weekday">Do</div>
+        <div class="calendar-weekday">Vr</div>
+        <div class="calendar-weekday">Za</div>
+        <div class="calendar-weekday">Zo</div>
       </div>
       
       <div class="calendar-days" id="calendarDays"></div>
@@ -162,11 +162,11 @@
       <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <div style="width: 12px; height: 12px; background-color: rgba(139, 0, 0, 0.5); border-radius: 4px;"></div>
-          <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Blocked</span>
+          <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Geblokkeerd</span>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <div style="width: 12px; height: 12px; background-color: #e8580a; border-radius: 4px;"></div>
-          <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Selected</span>
+          <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Geselecteerd</span>
         </div>
       </div>
     </div>
@@ -174,11 +174,11 @@
     <!-- Blocked Dates List -->
     <div class="blocked-dates-list">
       <h3 style="font-weight: 700; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
-        <span>Blocked Dates (<span id="blockedCount">0</span>)</span>
+        <span>Geblokkeerde datums (<span id="blockedCount">0</span>)</span>
       </h3>
       <div id="blockedDatesList">
         <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
-          No blocked dates yet. Click on calendar days to block them.
+          Nog geen geblokkeerde datums. Klik in de kalender om een datum te blokkeren.
         </p>
       </div>
     </div>
@@ -198,17 +198,17 @@
             </div>
           </a>
           <p style="margin-top: 1rem;">
-            Professional personal training in the Netherlands. Transforming bodies and minds since 2010.
+            Professionele personal training in Nederland. Lichamen en geesten transformeren sinds 2010.
           </p>
         </div>
         
         <div>
-          <h4>Quick Links</h4>
+          <h4>Snelle links</h4>
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Mark</a></li>
-            <li><a href="services.html">Training Programs</a></li>
-            <li><a href="booking.html">Book a Session</a></li>
+            <li><a href="about.html">Over Mark</a></li>
+            <li><a href="services.html">Trainingsprogramma's</a></li>
+            <li><a href="booking.html">Plan een sessie</a></li>
           </ul>
         </div>
         
@@ -217,13 +217,13 @@
           <ul>
             <li>📞 +31 6 12 34 56 78</li>
             <li>✉️ info@markcoxtraining.nl</li>
-            <li>📍 Amsterdam, Netherlands</li>
+            <li>📍 Amsterdam, Nederland</li>
           </ul>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>© 2026 Mark Cox Training. All rights reserved.</p>
+        <p>© 2026 Mark Cox Training. Alle rechten voorbehouden.</p>
       </div>
     </div>
   </footer>
@@ -248,7 +248,7 @@
         renderCalendar();
         renderBlockedList();
       } else {
-        alert('Incorrect PIN. Please try again.\n\nDemo PIN: 1234');
+        alert('Foute PIN. Probeer het opnieuw.\n\nDemo PIN: 1234');
         document.getElementById('pinInput').value = '';
       }
     }
@@ -258,7 +258,7 @@
       document.getElementById('pinContainer').classList.remove('hidden');
       document.getElementById('pinInput').value = '';
     }
-    
+
     function renderCalendar() {
       const year = currentMonth.getFullYear();
       const month = currentMonth.getMonth();
@@ -271,7 +271,6 @@
       const daysContainer = document.getElementById('calendarDays');
       daysContainer.innerHTML = '';
       
-      // Empty cells
       for (let i = 0; i < firstDay; i++) {
         const emptyDay = document.createElement('button');
         emptyDay.className = 'calendar-day outside';
@@ -279,7 +278,6 @@
         daysContainer.appendChild(emptyDay);
       }
       
-      // Days
       for (let day = 1; day <= daysInMonth; day++) {
         const date = new Date(year, month, day);
         const dayBtn = document.createElement('button');
@@ -310,66 +308,65 @@
         daysContainer.appendChild(dayBtn);
       }
     }
-    
+
     function toggleBlockDate(date) {
       if (isPastDate(date)) return;
-      
+
       const dateStr = formatDate(date);
       const blocked = getBlockedDates();
-      
+
       if (blocked.includes(dateStr)) {
         removeBlockedDate(dateStr);
       } else {
         addBlockedDate(dateStr);
       }
-      
+
       selectedDate = date;
       renderCalendar();
       renderBlockedList();
     }
-    
+
     function renderBlockedList() {
       const blocked = getBlockedDates();
       const container = document.getElementById('blockedDatesList');
       const count = document.getElementById('blockedCount');
-      
+
       count.textContent = blocked.length;
-      
+
       if (blocked.length === 0) {
         container.innerHTML = `
           <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
-            No blocked dates yet. Click on calendar days to block them.
+            Nog geen geblokkeerde datums. Klik in de kalender om een datum te blokkeren.
           </p>
         `;
         return;
       }
-      
-      // Sort dates
+
       const sorted = blocked.sort((a, b) => new Date(a) - new Date(b));
-      
+
       container.innerHTML = sorted.map(dateStr => {
         const date = new Date(dateStr + 'T00:00:00');
         return `
           <div class="blocked-date-item">
             <span style="color: rgba(255, 255, 255, 0.8);">${formatDateDisplay(date)}</span>
-            <button class="remove-btn" onclick="unblockDate('${dateStr}')">UNBLOCK</button>
+            <button class="remove-btn" onclick="unblockDate('${dateStr}')">DEBLOKKEER</button>
           </div>
         `;
       }).join('');
     }
-    
+
     function unblockDate(dateStr) {
       removeBlockedDate(dateStr);
       selectedDate = null;
       renderCalendar();
       renderBlockedList();
     }
-    
+
     function previousMonth() {
       currentMonth.setMonth(currentMonth.getMonth() - 1);
       renderCalendar();
     }
-    
+
     function nextMonth() {
       currentMonth.setMonth(currentMonth.getMonth() + 1);
       renderCalendar();

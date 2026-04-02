@@ -1,5 +1,4 @@
-
-<link rel="stylesheet" href="../styles.css">
+﻿<link rel="stylesheet" href="../styles.css">
 <footer>
     <div class="container">
       <div class="footer-grid">
@@ -13,8 +12,8 @@
             </div>
           </a>
           <p class="text-footer">
-            Professional personal training in the Netherlands. 
-            Transforming bodies and minds since 2010.
+            Professionele personal training in Nederland.
+            Lichamen en geesten transformeren sinds 2010.
           </p>
           <div class="social-links">
             <a href="#" class="social-link">📷</a>
@@ -23,12 +22,12 @@
         </div>
         
         <div class="quick-links">
-          <h4>Quick Links</h4>
+          <h4>Snelle links</h4>
           <ul>
             <li><a href="../index.php">Home</a></li>
-            <li><a href="../pages/about.php">About Mark</a></li>
-            <li><a href="../pages/services.php">Training Programs</a></li>
-            <li><a href="../pages/booking.php">Book a Session</a></li>
+            <li><a href="../pages/about.php">Over Mark</a></li>
+            <li><a href="../pages/services.php">Trainingsprogramma's</a></li>
+            <li><a href="../pages/booking.php">Plan een sessie</a></li>
           </ul>
         </div>
         
@@ -37,13 +36,13 @@
           <ul>
             <li>📞 +31 6 12 34 56 78</li>
             <li>✉️ info@markcoxtraining.nl</li>
-            <li>📍 Amsterdam, Netherlands</li>
+            <li>📍 Amsterdam, Nederland</li>
           </ul>
         </div>
       </div>
       
       <div class="footer-bottom">
-        <p>© 2026 Mark Cox Training. All rights reserved.</p>
+        <p>© 2026 Mark Cox Training. Alle rechten voorbehouden.</p>
       </div>
     </div>
   </footer>

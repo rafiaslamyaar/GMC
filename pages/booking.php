@@ -1,12 +1,12 @@
-<?php
+﻿<?php
 include "../includes/header.php";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book a Session - Mark Cox Training</title>
+  <title>Boek een sessie - Mark Cox Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -91,14 +91,14 @@ include "../includes/header.php";
   <div class="page-hero">
     <div class="container">
       <div class="hero-label">
-        <span>Booking</span>
+        <span>Boeking</span>
       </div>
       <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; margin-bottom: 1rem;">
-        BOOK YOUR<br>
-        <span class="highlight">SESSION</span>
+        BOEK JE<br>
+        <span class="highlight">SESSIE</span>
       </h1>
       <p style="color: rgba(255, 255, 255, 0.5); max-width: 600px;">
-        Select a date and time, then fill in your details. Mark will confirm within 24 hours.
+        Kies een datum en tijd en vul je gegevens in. Mark bevestigt binnen 24 uur.
       </p>
     </div>
   </div>
@@ -110,18 +110,18 @@ include "../includes/header.php";
       <div class="calendar" id="calendarContainer">
         <div class="calendar-header">
           <button class="calendar-nav-btn" onclick="previousMonth()">‹</button>
-          <div class="calendar-title" id="monthTitle">January 2026</div>
+          <div class="calendar-title" id="monthTitle">januari 2026</div>
           <button class="calendar-nav-btn" onclick="nextMonth()">›</button>
         </div>
         
         <div class="calendar-weekdays">
-          <div class="calendar-weekday">Mon</div>
-          <div class="calendar-weekday">Tue</div>
-          <div class="calendar-weekday">Wed</div>
-          <div class="calendar-weekday">Thu</div>
-          <div class="calendar-weekday">Fri</div>
-          <div class="calendar-weekday">Sat</div>
-          <div class="calendar-weekday">Sun</div>
+          <div class="calendar-weekday">Ma</div>
+          <div class="calendar-weekday">Di</div>
+          <div class="calendar-weekday">Wo</div>
+          <div class="calendar-weekday">Do</div>
+          <div class="calendar-weekday">Vr</div>
+          <div class="calendar-weekday">Za</div>
+          <div class="calendar-weekday">Zo</div>
         </div>
         
         <div class="calendar-days" id="calendarDays">
@@ -131,29 +131,29 @@ include "../includes/header.php";
         <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <div style="width: 12px; height: 12px; background-color: #e8580a; border-radius: 4px;"></div>
-            <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Selected</span>
+            <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Geselecteerd</span>
           </div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <div style="width: 12px; height: 12px; background-color: rgba(139, 0, 0, 0.5); border-radius: 4px;"></div>
-            <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Unavailable</span>
+            <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Niet beschikbaar</span>
           </div>
         </div>
       </div>
       
       <!-- Time Selection -->
       <div class="card" style="height: fit-content; position: sticky; top: 90px;">
-        <h3 style="font-weight: 700; margin-bottom: 1rem;" id="dateTitle">Select a date first</h3>
+        <h3 style="font-weight: 700; margin-bottom: 1rem;" id="dateTitle">Kies eerst een datum</h3>
         <div id="timeSlotContainer">
           <div style="text-align: center; padding: 3rem 1rem;">
             <div style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem;">📅</div>
             <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.85rem;">
-              Pick a day on the calendar to see available times
+              Kies een dag in de kalender om beschikbare tijden te zien
             </p>
           </div>
         </div>
         
         <button id="continueBtn" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; display: none;" onclick="showBookingForm()">
-          CONTINUE →
+          DOORGAAN →
         </button>
       </div>
     </div>
@@ -170,47 +170,47 @@ include "../includes/header.php";
             </div>
           </div>
           
-          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;">Your Details</h3>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;">Je gegevens</h3>
           
           <form onsubmit="submitBooking(event)">
             <div class="form-group">
-              <label class="form-label">Full Name *</label>
-              <input type="text" class="form-input" id="nameInput" required placeholder="Your full name">
+              <label class="form-label">Volledige naam *</label>
+              <input type="text" class="form-input" id="nameInput" required placeholder="Je volledige naam">
             </div>
             
             <div class="form-group">
-              <label class="form-label">Email Address *</label>
-              <input type="email" class="form-input" id="emailInput" required placeholder="your@email.com">
+              <label class="form-label">E-mailadres *</label>
+              <input type="email" class="form-input" id="emailInput" required placeholder="jij@email.com">
             </div>
             
             <div class="form-group">
-              <label class="form-label">Phone Number</label>
+              <label class="form-label">Telefoonnummer</label>
               <input type="tel" class="form-input" id="phoneInput" placeholder="+31 6 ...">
             </div>
             
             <div class="form-group">
-              <label class="form-label">Program *</label>
+              <label class="form-label">Programma *</label>
               <select class="form-select" id="programInput" required>
-                <option value="" disabled selected>Select a program</option>
-                <option value="1-on-1 Personal Training">1-on-1 Personal Training</option>
+                <option value="" disabled selected>Kies een programma</option>
+                <option value="1-op-1 Personal Training">1-op-1 Personal Training</option>
                 <option value="Outdoor Bootcamp">Outdoor Bootcamp</option>
-                <option value="Strength & Performance">Strength & Performance</option>
-                <option value="Nutrition Coaching">Nutrition Coaching</option>
-                <option value="Free Consultation">Free Consultation</option>
+                <option value="Kracht & Prestaties">Kracht & Prestaties</option>
+                <option value="Voedingscoaching">Voedingscoaching</option>
+                <option value="Gratis consult">Gratis consult</option>
               </select>
             </div>
             
             <div class="form-group">
-              <label class="form-label">Additional Notes</label>
-              <textarea class="form-textarea" id="notesInput" placeholder="Any injuries, goals, or questions?"></textarea>
+              <label class="form-label">Extra opmerkingen</label>
+              <textarea class="form-textarea" id="notesInput" placeholder="Blessures, doelen of vragen?"></textarea>
             </div>
             
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
               <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="backToCalendar()">
-                ← BACK
+                ← TERUG
               </button>
               <button type="submit" class="btn btn-primary" style="flex: 2;">
-                CONFIRM BOOKING ✓
+                BEVESTIG BOEKING ✓
               </button>
             </div>
           </form>
@@ -236,18 +236,14 @@ include "../includes/header.php";
       const year = currentMonth.getFullYear();
       const month = currentMonth.getMonth();
       
-      // Update month title
       document.getElementById('monthTitle').textContent = getMonthName(currentMonth);
       
-      // Get calendar data
       const daysInMonth = getDaysInMonth(year, month);
       const firstDay = getFirstDayOfMonth(year, month);
       
-      // Clear previous days
       const daysContainer = document.getElementById('calendarDays');
       daysContainer.innerHTML = '';
       
-      // Add empty cells for days before month starts
       for (let i = 0; i < firstDay; i++) {
         const emptyDay = document.createElement('button');
         emptyDay.className = 'calendar-day outside';
@@ -255,7 +251,6 @@ include "../includes/header.php";
         daysContainer.appendChild(emptyDay);
       }
       
-      // Add days
       for (let day = 1; day <= daysInMonth; day++) {
         const date = new Date(year, month, day);
         const dateStr = formatDate(date);
@@ -263,7 +258,6 @@ include "../includes/header.php";
         dayBtn.className = 'calendar-day';
         dayBtn.textContent = day;
         
-        // Check if blocked
         const blocked = isDateBlocked(date);
         const past = isPastDate(date);
         const today = isToday(date);
@@ -307,11 +301,11 @@ include "../includes/header.php";
           <div style="text-align: center; padding: 3rem 1rem;">
             <div style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem;">📅</div>
             <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.85rem;">
-              Pick a day on the calendar to see available times
+              Kies een dag in de kalender om beschikbare tijden te zien
             </p>
           </div>
         `;
-        dateTitle.textContent = 'Select a date first';
+        dateTitle.textContent = 'Kies eerst een datum';
         continueBtn.style.display = 'none';
         return;
       }
@@ -346,7 +340,7 @@ include "../includes/header.php";
       document.getElementById('calendarContainer').parentElement.style.display = 'none';
       document.getElementById('bookingForm').classList.remove('hidden');
       document.getElementById('formDateDisplay').textContent = formatDateDisplay(selectedDate);
-      document.getElementById('formTimeDisplay').textContent = `at ${selectedTime}`;
+      document.getElementById('formTimeDisplay').textContent = `om ${selectedTime}`;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
@@ -365,20 +359,19 @@ include "../includes/header.php";
       const program = document.getElementById('programInput').value;
       const notes = document.getElementById('notesInput').value;
       
-      // Show success message
       document.getElementById('bookingContent').innerHTML = `
         <div class="success-message">
           <div class="success-icon">✓</div>
-          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">BOOKING CONFIRMED!</h2>
+          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">BOEKING BEVESTIGD!</h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.7;">
-            Thanks <span style="color: white;">${name}</span>! Your session has been requested for 
-            <span style="color: #e8580a;">${formatDateDisplay(selectedDate)} at ${selectedTime}</span>.
+            Bedankt <span style="color: white;">${name}</span>! Je sessie is aangevraagd voor 
+            <span style="color: #e8580a;">${formatDateDisplay(selectedDate)} om ${selectedTime}</span>.
           </p>
           <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-bottom: 2rem;">
-            Mark will confirm your appointment via email to <strong style="color: rgba(255, 255, 255, 0.7);">${email}</strong> within 24 hours.
+            Mark bevestigt je afspraak per e-mail naar <strong style="color: rgba(255, 255, 255, 0.7);">${email}</strong> binnen 24 uur.
           </p>
           <button onclick="location.reload()" class="btn btn-primary">
-            BOOK ANOTHER SESSION
+            BOEK NOG EEN SESSIE
           </button>
         </div>
       `;

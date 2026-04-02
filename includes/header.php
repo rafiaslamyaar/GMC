@@ -1,7 +1,7 @@
-
+﻿
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,9 +27,9 @@
       
       <nav>
         <a href="../index.php">Home</a>
-        <a href="../pages/about.php">About</a>
-        <a href="../pages/services.php">Services</a>
-        <a href="../pages/booking.php" class="btn-primary">Book Now</a>
+        <a href="../pages/about.php">Over</a>
+        <a href="../pages/services.php">Diensten</a>
+        <a href="../pages/booking.php" class="btn-primary">Boek nu</a>
       </nav>
       
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
@@ -37,4 +37,3 @@
   </header>
 </body>
 </html>
-
