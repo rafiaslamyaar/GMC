@@ -1,10 +1,9 @@
-
-<?php
+﻿<?php
 include "includes/header.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,21 +26,21 @@ include "includes/header.php";
       <div class="hero-content">
         
         <h1>
-          TRAIN WITH<br>
-          <span class="highlight">PURPOSE.</span><br>
-          LIVE WITH<br>
-          POWER.
+          TRAIN MET<br>
+          <span class="highlight">DOEL.</span><br>
+          LEEF MET<br>
+          <span class="highlight">KRACHT.</span>
         </h1>
         <p>
-          Expert personal training tailored to your goals. Whether you want to lose weight, 
-          build muscle, or boost performance — Mark Cox will get you there.
+          Expert personal training op maat van jouw doelen. Of je nu wil afvallen, spieren opbouwen,
+          of je prestaties wil verbeteren — Mark Cox helpt je er te komen.
         </p>
         <div class="hero-buttons">
-          <a href="pages/booking.html" class="btn btn-primary">
-            BOOK CONSULTATION →
+          <a href="pages/booking.php" class="btn btn-primary">
+            BOEK CONSULTATIE →
           </a>
-          <a href="pages/services.html" class="btn btn-secondary">
-            VIEW PROGRAMS
+          <a href="pages/services.php" class="btn btn-secondary">
+            BEKIJK PROGRAMMA'S
           </a>
         </div>
       </div>
@@ -54,19 +53,19 @@ include "includes/header.php";
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-value">500+</div>
-          <div class="stat-label">Clients Trained</div>
+          <div class="stat-label">Getrainde cliënten</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">15+</div>
-          <div class="stat-label">Years Experience</div>
+          <div class="stat-label">Jaren ervaring</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">98%</div>
-          <div class="stat-label">Success Rate</div>
+          <div class="stat-label">Slagingspercentage</div>
         </div>
         <div class="stat-item">
           <div class="stat-value">4.9</div>
-          <div class="stat-label">Average Rating</div>
+          <div class="stat-label">Gemiddelde beoordeling</div>
         </div>
       </div>
     </div>
@@ -83,23 +82,23 @@ include "includes/header.php";
         </div>
         <div>
           <div class="hero-label">
-            <span>About Mark</span>
+            <span>Over Mark</span>
           </div>
           <h2 style="margin-bottom: 1.5rem; line-height: 1.2;">
-            YOUR COACH,<br>
-            YOUR <span class="highlight">CHAMPION</span>
+            JOUW COACH,<br>
+            JOUW <span class="highlight">KAMPIOEN</span>
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
-            Mark Cox is a certified personal trainer based in Amsterdam with over 15 years of experience 
-            transforming the lives of his clients. His philosophy combines science-backed training methods 
-            with a deep understanding of individual needs.
+            Mark Cox is een gecertificeerde personal trainer in Amsterdam met meer dan 15 jaar ervaring
+            in het transformeren van levens. Zijn filosofie combineert onderbouwde trainingsmethodes
+            met een persoonlijk aanpak.
           </p>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem;">
-            Whether you're just starting out or looking to push your performance to the next level, 
-            Mark creates personalised programs that deliver real, lasting results.
+            Of je nu net begint of je prestaties wil verbeteren, Mark maakt gepersonaliseerde programma's
+            die echte, blijvende resultaten opleveren.
           </p>
-          <a href="about.html" class="btn btn-primary">
-            READ MORE ABOUT MARK →
+          <a href="about.php" class="btn btn-primary">
+            MEER OVER MARK LEZEN →
           </a>
         </div>
       </div>
@@ -111,9 +110,9 @@ include "includes/header.php";
     <div class="container">
       <div class="section-header">
         <div class="section-label">
-          What I Offer
+          Wat ik aanbied
         </div>
-        <h2>TRAINING <span class="highlight">PROGRAMS</span></h2>
+        <h2>TRAINING <span class="highlight">PROGRAMMA'S</span></h2>
       </div>
       
       <div class="grid grid-3">
@@ -121,12 +120,12 @@ include "includes/header.php";
           <img src="images/duo-training.webp" 
                alt="Personal Training" 
                style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Personal Training/ Duo Training</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Personal Training / Duo Training</h3>
           <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">
-            1-on-1 sessions tailored to your goals, fitness level and schedule.
+            1-op-1 sessies op maat van jouw doelen, niveau en agenda.
           </p>
-          <a href="services.html" style="color: #e8580a; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
-            Learn More →
+          <a href="services.php" style="color: #e8580a; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
+            Lees meer →
           </a>
         </div>
         
@@ -134,12 +133,12 @@ include "includes/header.php";
           <img src="images/groep.webp"     
                alt="Outdoor Bootcamp" 
                style="width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Groep Training</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Groepstraining</h3>
           <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; margin-bottom: 1rem;">
-            High-energy group sessions that make fitness fun and social.
+            Energierijke groepstrainingen die sport leuk en sociaal maken.
           </p>
-          <a href="services.html" style="color: #e8580a; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
-            Learn More →
+          <a href="services.php" style="color: #e8580a; font-size: 0.8rem; font-weight: 600; text-decoration: none;">
+            Lees meer →
           </a>
         </div>
         
@@ -147,8 +146,8 @@ include "includes/header.php";
       </div>
       
       <div class="text-center" style="margin-top: 2.5rem;">
-        <a href="services.html" class="btn btn-secondary">
-          VIEW ALL PROGRAMS →
+        <a href="services.php" class="btn btn-secondary">
+          BEKIJK ALLE PROGRAMMA'S →
         </a>
       </div>
     </div>
@@ -159,20 +158,17 @@ include "includes/header.php";
     <div class="container">
       <div style="max-width: 800px; margin: 0 auto; text-align: center;">
         <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.25rem;">
-          READY TO START YOUR TRANSFORMATION?
+          KLAAR OM JE TRANSFORMATIE TE STARTEN?
         </h2>
         <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; margin-bottom: 2.5rem;">
-          Book your free consultation today and take the first step towards the body and lifestyle you deserve.
+          Boek vandaag nog je consult en zet de eerste stap naar het lichaam en leven dat je verdient.
         </p>
-        <a href="booking.html" class="btn" style="background-color: white; color: #e8580a;">
-          BOOK YOUR FREE SESSION →
+        <a href="pages/booking.php" class="btn" style="background-color: white; color: #e8580a;">
+          BOEK JE SESSIE →
         </a>
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  
 
   <script src="main.js"></script>
 </body>

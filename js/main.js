@@ -1,4 +1,4 @@
-// Mark Cox Training - Main JavaScript
+﻿// Mark Cox Training - Main JavaScript
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
@@ -72,11 +72,11 @@ function formatDate(date) {
 
 function formatDateDisplay(date) {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
+  return date.toLocaleDateString('nl-NL', options);
 }
 
 function getMonthName(date) {
-  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  return date.toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
 }
 
 function getDaysInMonth(year, month) {
