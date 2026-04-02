@@ -94,6 +94,12 @@ try {
       margin: 0 auto 2rem;
       font-size: 2.5rem;
     }
+
+    .calendar-day.partially-booked {
+      background: rgba(232, 88, 10, 0.12);
+      border-color: rgba(232, 88, 10, 0.5);
+      color: #fff;
+    }
     
     @media (max-width: 1023px) {
       .booking-grid {
@@ -148,6 +154,10 @@ try {
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <div style="width: 12px; height: 12px; background-color: #e8580a; border-radius: 4px;"></div>
             <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Geselecteerd</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="width: 12px; height: 12px; background-color: rgba(232, 88, 10, 0.25); border-radius: 4px;"></div>
+            <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Gedeeltelijk geboekt</span>
           </div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <div style="width: 12px; height: 12px; background-color: rgba(139, 0, 0, 0.5); border-radius: 4px;"></div>
@@ -303,23 +313,22 @@ try {
         } else if (past) {
           dayBtn.disabled = true;
         }
-        
+
         if (today && !blocked) {
           dayBtn.classList.add('today');
         }
 
         const booked = isDayBooked(date);
         if (booked) {
-          dayBtn.classList.add('blocked');
-          dayBtn.title = 'Al geboekt (ander slot)';
-          dayBtn.disabled = true;
+          dayBtn.classList.add('partially-booked');
+          dayBtn.title = 'Er zijn al boekingen op deze dag (kies een tijdslot)';
         }
-        
+
         if (selectedDate && isSameDate(date, selectedDate)) {
           dayBtn.classList.add('selected');
         }
-        
-        if (!blocked && !booked && !past) {
+
+        if (!blocked && !past) {
           dayBtn.onclick = () => selectDate(date);
         }
         daysContainer.appendChild(dayBtn);

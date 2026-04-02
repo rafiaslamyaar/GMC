@@ -10,7 +10,7 @@ try {
     $stmt = $pdo->query('SELECT blocked_date FROM blocked_dates ORDER BY blocked_date');
     $blockedDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    $stmt2 = $pdo->query('SELECT date, time, status FROM bookings WHERE status <> "cancelled" ORDER BY date, time');
+    $stmt2 = $pdo->query('SELECT id, date, time, status FROM bookings WHERE status <> "cancelled" ORDER BY date, time');
     $existingBookings = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     // Geef fallback als DB faalt
@@ -342,6 +342,35 @@ try {
       renderBookingSummary();
     }
 
+    async function updateBookingStatus(bookingId, newStatus) {
+      const formData = new FormData();
+      formData.append('id', bookingId);
+      formData.append('status', newStatus);
+
+      const response = await fetch('../pages/admin-booking-update.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      if (!data.success) {
+        alert(data.error || 'Status update mislukt.');
+        return false;
+      }
+
+      // update in-memory state en UI
+      const bookingIndex = DB_BOOKINGS.findIndex(b => b.id === bookingId);
+      if (bookingIndex > -1) {
+        if (newStatus === 'cancelled') {
+          DB_BOOKINGS.splice(bookingIndex, 1);
+        } else {
+          DB_BOOKINGS[bookingIndex].status = newStatus;
+        }
+      }
+      renderBookingSummary();
+      return true;
+    }
+
     function renderBlockedList() {
       const blocked = getBlockedDates();
       const container = document.getElementById('blockedDatesList');
@@ -397,7 +426,17 @@ try {
         <div style="margin-bottom: 1rem;"><strong>${formatDateDisplay(selectedDate)}</strong></div>
         ${statusBtn}
         <ul style="list-style: none; padding: 0; margin: 0;">
-          ${dayBookings.map(b => `<li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">${b.time} – ${b.status.toUpperCase()}</li>`).join('')}
+          ${dayBookings.map(b => `
+            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+              <span>${b.time} – ${b.status.toUpperCase()}</span>
+              ${b.status === 'pending'
+                ? `<span>
+                      <button class="btn btn-primary" style="font-size: 0.75rem; margin-right: 0.25rem;" onclick="updateBookingStatus(${b.id}, 'confirmed')">bevestig</button>
+                      <button class="btn btn-secondary" style="font-size: 0.75rem;" onclick="updateBookingStatus(${b.id}, 'cancelled')">annuleer</button>
+                    </span>`
+                : ''}
+            </li>
+          `).join('')}
         </ul>
       `;
     }
