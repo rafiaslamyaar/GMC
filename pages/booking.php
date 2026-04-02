@@ -1,5 +1,21 @@
 ﻿<?php
 include "../includes/header.php";
+require_once __DIR__ . "/../includes/db.php";
+
+$blockedDates = [];
+$bookedSlots = [];
+
+try {
+    $stmt = $pdo->query('SELECT blocked_date FROM blocked_dates');
+    $blockedDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $stmt2 = $pdo->query('SELECT date, time FROM bookings WHERE status <> "cancelled"');
+    $bookedSlots = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // fallback if DB unavailable
+    $blockedDates = [];
+    $bookedSlots = [];
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -212,6 +228,8 @@ include "../includes/header.php";
               <button type="submit" class="btn btn-primary" style="flex: 2;">
                 BEVESTIG BOEKING ✓
               </button>
+              <a href="/pages/admin-calendar.php">hiiiii</a>
+
             </div>
           </form>
         </div>
@@ -219,13 +237,30 @@ include "../includes/header.php";
     </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="../js/main.js"></script>
   <script>
     // Booking state
     let currentMonth = new Date();
     let selectedDate = null;
     let selectedTime = null;
-    
+
+    const DB_BLOCKED_DATES = new Set(<?= json_encode($blockedDates) ?>);
+    const DB_BOOKED_SLOTS = <?= json_encode($bookedSlots) ?>;
+
+    function isDateBlocked(date) {
+      return DB_BLOCKED_DATES.has(formatDate(date));
+    }
+
+    function isDayBooked(date) {
+      const dateStr = formatDate(date);
+      return DB_BOOKED_SLOTS.some(b => b.date === dateStr);
+    }
+
+    function isSlotBooked(date, slotTime) {
+      const dateStr = formatDate(date);
+      return DB_BOOKED_SLOTS.some(b => b.date === dateStr && b.time === slotTime);
+    }
+
     const TIME_SLOTS = [
       '07:00', '08:00', '09:00', '10:00', '11:00',
       '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'
@@ -272,12 +307,21 @@ include "../includes/header.php";
         if (today && !blocked) {
           dayBtn.classList.add('today');
         }
+
+        const booked = isDayBooked(date);
+        if (booked) {
+          dayBtn.classList.add('blocked');
+          dayBtn.title = 'Al geboekt (ander slot)';
+          dayBtn.disabled = true;
+        }
         
         if (selectedDate && isSameDate(date, selectedDate)) {
           dayBtn.classList.add('selected');
         }
         
-        dayBtn.onclick = () => selectDate(date);
+        if (!blocked && !booked && !past) {
+          dayBtn.onclick = () => selectDate(date);
+        }
         daysContainer.appendChild(dayBtn);
       }
     }
@@ -319,7 +363,19 @@ include "../includes/header.php";
         const btn = document.createElement('button');
         btn.className = 'time-slot';
         btn.textContent = slot;
-        btn.onclick = () => selectTime(slot);
+
+        const blockedDate = isDateBlocked(selectedDate);
+        const booked = isSlotBooked(selectedDate, slot);
+
+        if (blockedDate || booked) {
+          btn.disabled = true;
+          btn.style.opacity = '0.4';
+          btn.style.cursor = 'not-allowed';
+          btn.title = blockedDate ? 'Datum is geblokkeerd' : 'Tijd is al geboekt';
+        } else {
+          btn.onclick = () => selectTime(slot);
+        }
+
         if (selectedTime === slot) {
           btn.classList.add('selected');
         }
@@ -358,25 +414,52 @@ include "../includes/header.php";
       const phone = document.getElementById('phoneInput').value;
       const program = document.getElementById('programInput').value;
       const notes = document.getElementById('notesInput').value;
-      
-      document.getElementById('bookingContent').innerHTML = `
-        <div class="success-message">
-          <div class="success-icon">✓</div>
-          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">BOEKING BEVESTIGD!</h2>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.7;">
-            Bedankt <span style="color: white;">${name}</span>! Je sessie is aangevraagd voor 
-            <span style="color: #e8580a;">${formatDateDisplay(selectedDate)} om ${selectedTime}</span>.
-          </p>
-          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-bottom: 2rem;">
-            Mark bevestigt je afspraak per e-mail naar <strong style="color: rgba(255, 255, 255, 0.7);">${email}</strong> binnen 24 uur.
-          </p>
-          <button onclick="location.reload()" class="btn btn-primary">
-            BOEK NOG EEN SESSIE
-          </button>
-        </div>
-      `;
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (!selectedDate || !selectedTime) {
+        alert('Selecteer eerst een datum en tijd.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('program', program);
+      formData.append('notes', notes);
+      formData.append('date', formatDate(selectedDate));
+      formData.append('time', selectedTime);
+
+      fetch('../pages/booking-submit.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('bookingContent').innerHTML = `
+            <div class="success-message">
+              <div class="success-icon">✓</div>
+              <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">BOEKING BEVESTIGD!</h2>
+              <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.7;">
+                Bedankt <span style="color: white;">${name}</span>! Je sessie is aangevraagd voor 
+                <span style="color: #e8580a;">${formatDateDisplay(selectedDate)} om ${selectedTime}</span>.
+              </p>
+              <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-bottom: 2rem;">
+                Mark bevestigt je afspraak per e-mail naar <strong style="color: rgba(255, 255, 255, 0.7);">${email}</strong> binnen 24 uur.
+              </p>
+              <button onclick="location.reload()" class="btn btn-primary">
+                BOEK NOG EEN SESSIE
+              </button>
+            </div>
+          `;
+        } else {
+          alert(data.error || 'Er is iets misgegaan bij het boeken.');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Fout bij serververzoek. Controleer de console voor details.');
+      });
     }
     
     function previousMonth() {

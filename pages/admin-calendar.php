@@ -1,6 +1,22 @@
 ﻿
 <?php
 include "../includes/header.php";
+require_once __DIR__ . "/../includes/db.php";
+
+$blockedDates = [];
+$existingBookings = [];
+
+try {
+    $stmt = $pdo->query('SELECT blocked_date FROM blocked_dates ORDER BY blocked_date');
+    $blockedDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $stmt2 = $pdo->query('SELECT date, time, status FROM bookings WHERE status <> "cancelled" ORDER BY date, time');
+    $existingBookings = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Geef fallback als DB faalt
+    $blockedDates = [];
+    $existingBookings = [];
+}
 ?>
 
 
@@ -167,22 +183,68 @@ include "../includes/header.php";
         </p>
       </div>
     </div>
+
+    <!-- Booking Summary -->
+    <div class="blocked-dates-list">
+      <h3 style="font-weight: 700; margin-bottom: 1rem;">Boekingsoverzicht</h3>
+      <div id="bookingSummary">
+        <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
+          Selecteer een datum in de kalender om alle boekingen te zien.
+        </p>
+      </div>
+    </div>
   </div>
 
  
 
-  <script src="main.js"></script>
+  <script src="../js/main.js"></script>
   <script>
     const CORRECT_PIN = '1234';
     let currentMonth = new Date();
     let selectedDate = null;
-    
+
+    const DB_BLOCKED_DATES = new Set(<?= json_encode($blockedDates) ?>);
+    const DB_BOOKINGS = <?= json_encode($existingBookings) ?>;
+
+    function getBlockedDates() {
+      return Array.from(DB_BLOCKED_DATES).sort();
+    }
+
+    function isDateBlocked(date) {
+      return DB_BLOCKED_DATES.has(formatDate(date));
+    }
+
+    async function updateBlockedDate(dateStr, action) {
+      const formData = new FormData();
+      formData.append('date', dateStr);
+      formData.append('action', action);
+
+      const response = await fetch('../pages/admin-block.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      if (!data.success) {
+        alert(data.error || 'Actie mislukt.');
+        return false;
+      }
+
+      if (action === 'block') {
+        DB_BLOCKED_DATES.add(dateStr);
+      } else {
+        DB_BLOCKED_DATES.delete(dateStr);
+      }
+
+      return true;
+    }
+
     function handlePinEnter(event) {
       if (event.key === 'Enter') {
         checkPin();
       }
     }
-    
+
     function checkPin() {
       const pin = document.getElementById('pinInput').value;
       if (pin === CORRECT_PIN) {
@@ -190,12 +252,13 @@ include "../includes/header.php";
         document.getElementById('adminPanel').classList.remove('hidden');
         renderCalendar();
         renderBlockedList();
+        renderBookingSummary();
       } else {
         alert('Foute PIN. Probeer het opnieuw.\n\nDemo PIN: 1234');
         document.getElementById('pinInput').value = '';
       }
     }
-    
+
     function logout() {
       document.getElementById('adminPanel').classList.add('hidden');
       document.getElementById('pinContainer').classList.remove('hidden');
@@ -205,68 +268,78 @@ include "../includes/header.php";
     function renderCalendar() {
       const year = currentMonth.getFullYear();
       const month = currentMonth.getMonth();
-      
+
       document.getElementById('monthTitle').textContent = getMonthName(currentMonth);
-      
+
       const daysInMonth = getDaysInMonth(year, month);
       const firstDay = getFirstDayOfMonth(year, month);
-      
+
       const daysContainer = document.getElementById('calendarDays');
       daysContainer.innerHTML = '';
-      
+
       for (let i = 0; i < firstDay; i++) {
         const emptyDay = document.createElement('button');
         emptyDay.className = 'calendar-day outside';
         emptyDay.disabled = true;
         daysContainer.appendChild(emptyDay);
       }
-      
+
       for (let day = 1; day <= daysInMonth; day++) {
         const date = new Date(year, month, day);
         const dayBtn = document.createElement('button');
         dayBtn.className = 'calendar-day';
         dayBtn.textContent = day;
-        
+
         const blocked = isDateBlocked(date);
         const past = isPastDate(date);
         const today = isToday(date);
-        
+
         if (blocked) {
           dayBtn.classList.add('blocked');
         }
-        
+
         if (past && !blocked) {
           dayBtn.disabled = true;
         }
-        
+
         if (today && !blocked) {
           dayBtn.classList.add('today');
         }
-        
+
         if (selectedDate && isSameDate(date, selectedDate)) {
           dayBtn.classList.add('selected');
         }
-        
-        dayBtn.onclick = () => toggleBlockDate(date);
+
+        if (!past) {
+          dayBtn.onclick = () => selectDate(date);
+        }
+
         daysContainer.appendChild(dayBtn);
       }
+      renderBookingSummary();
     }
 
-    function toggleBlockDate(date) {
+    function selectDate(date) {
+      if (isPastDate(date)) return;
+      selectedDate = date;
+      renderCalendar();
+      renderBookingSummary();
+    }
+
+    async function toggleBlockDate(date) {
       if (isPastDate(date)) return;
 
       const dateStr = formatDate(date);
-      const blocked = getBlockedDates();
+      const blocked = isDateBlocked(date);
+      const action = blocked ? 'unblock' : 'block';
 
-      if (blocked.includes(dateStr)) {
-        removeBlockedDate(dateStr);
-      } else {
-        addBlockedDate(dateStr);
-      }
+      const result = await updateBlockedDate(dateStr, action);
+      if (!result) return;
 
       selectedDate = date;
       renderCalendar();
       renderBlockedList();
+      renderBookingSummary();
     }
 
     function renderBlockedList() {
@@ -285,9 +358,7 @@ include "../includes/header.php";
         return;
       }
 
-      const sorted = blocked.sort((a, b) => new Date(a) - new Date(b));
-
-      container.innerHTML = sorted.map(dateStr => {
+      container.innerHTML = blocked.map(dateStr => {
         const date = new Date(dateStr + 'T00:00:00');
         return `
           <div class="blocked-date-item">
@@ -298,11 +369,47 @@ include "../includes/header.php";
       }).join('');
     }
 
-    function unblockDate(dateStr) {
-      removeBlockedDate(dateStr);
+    function renderBookingSummary() {
+      const container = document.getElementById('bookingSummary');
+      if (!selectedDate) {
+        container.innerHTML = `<p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">Selecteer een datum in de kalender om alle boekingen te zien.</p>`;
+        return;
+      }
+
+      const dateStr = formatDate(selectedDate);
+      const dayBookings = DB_BOOKINGS.filter(b => b.date === dateStr);
+      const blocked = isDateBlocked(selectedDate);
+
+      const statusBtn = blocked
+        ? `<button class="btn btn-secondary" style="width: 100%; margin-bottom: 1rem;" onclick="toggleBlockDate(selectedDate)">Deblokkeren</button>`
+        : `<button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;" onclick="toggleBlockDate(selectedDate)">Blokkeren</button>`;
+
+      if (dayBookings.length === 0) {
+        container.innerHTML = `
+          <div style="margin-bottom: 1rem;"><strong>${formatDateDisplay(selectedDate)}</strong></div>
+          ${statusBtn}
+          <p style="text-align: center; color: rgba(255, 255, 255, 0.7); padding: 1rem 0;">Geen boekingen voor deze datum.</p>
+        `;
+        return;
+      }
+
+      container.innerHTML = `
+        <div style="margin-bottom: 1rem;"><strong>${formatDateDisplay(selectedDate)}</strong></div>
+        ${statusBtn}
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          ${dayBookings.map(b => `<li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">${b.time} – ${b.status.toUpperCase()}</li>`).join('')}
+        </ul>
+      `;
+    }
+
+    async function unblockDate(dateStr) {
+      const result = await updateBlockedDate(dateStr, 'unblock');
+      if (!result) return;
+
       selectedDate = null;
       renderCalendar();
       renderBlockedList();
+      renderBookingSummary();
     }
 
     function previousMonth() {
