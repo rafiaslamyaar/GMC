@@ -268,7 +268,7 @@ try {
 
     function isSlotBooked(date, slotTime) {
       const dateStr = formatDate(date);
-      return DB_BOOKED_SLOTS.some(b => b.date === dateStr && b.time === slotTime);
+      return DB_BOOKED_SLOTS.some(b => b.date === dateStr && b.time.startsWith(slotTime + ':'));
     }
 
     const TIME_SLOTS = [
@@ -365,26 +365,44 @@ try {
       
       dateTitle.textContent = formatDateDisplay(selectedDate);
       
+      const blockedDate = isDateBlocked(selectedDate);
+      if (blockedDate) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 3rem 1rem;">
+            <div style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem;">🚫</div>
+            <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.85rem;">
+              Deze datum is geblokkeerd door de trainer
+            </p>
+          </div>
+        `;
+        continueBtn.style.display = 'none';
+        return;
+      }
+      
+      const availableSlots = TIME_SLOTS.filter(slot => !isSlotBooked(selectedDate, slot));
+      
+      if (availableSlots.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 3rem 1rem;">
+            <div style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem;">⏰</div>
+            <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.85rem;">
+              Alle tijden zijn al geboekt voor deze datum
+            </p>
+          </div>
+        `;
+        continueBtn.style.display = 'none';
+        return;
+      }
+      
       container.innerHTML = '<div class="time-slots"></div>';
       const slotsGrid = container.querySelector('.time-slots');
       
-      TIME_SLOTS.forEach(slot => {
+      availableSlots.forEach(slot => {
         const btn = document.createElement('button');
         btn.className = 'time-slot';
         btn.textContent = slot;
-
-        const blockedDate = isDateBlocked(selectedDate);
-        const booked = isSlotBooked(selectedDate, slot);
-
-        if (blockedDate || booked) {
-          btn.disabled = true;
-          btn.style.opacity = '0.4';
-          btn.style.cursor = 'not-allowed';
-          btn.title = blockedDate ? 'Datum is geblokkeerd' : 'Tijd is al geboekt';
-        } else {
-          btn.onclick = () => selectTime(slot);
-        }
-
+        btn.onclick = () => selectTime(slot);
+        
         if (selectedTime === slot) {
           btn.classList.add('selected');
         }
@@ -393,6 +411,7 @@ try {
       
       continueBtn.style.display = selectedTime ? 'block' : 'none';
     }
+
     
     function selectTime(time) {
       selectedTime = time;

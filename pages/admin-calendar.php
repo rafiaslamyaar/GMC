@@ -10,7 +10,7 @@ try {
     $stmt = $pdo->query('SELECT blocked_date FROM blocked_dates ORDER BY blocked_date');
     $blockedDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    $stmt2 = $pdo->query('SELECT id, date, time, status FROM bookings WHERE status <> "cancelled" ORDER BY date, time');
+    $stmt2 = $pdo->query('SELECT id, date, time, status, name, program FROM bookings WHERE status <> "cancelled" ORDER BY date, time');
     $existingBookings = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     // Geef fallback als DB faalt
@@ -29,7 +29,9 @@ try {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin-calendar.css">
+
   <style>
     .admin-container {
       max-width: 900px;
@@ -427,14 +429,20 @@ try {
         ${statusBtn}
         <ul style="list-style: none; padding: 0; margin: 0;">
           ${dayBookings.map(b => `
-            <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
-              <span>${b.time} – ${b.status.toUpperCase()}</span>
-              ${b.status === 'pending'
-                ? `<span>
-                      <button class="btn btn-primary" style="font-size: 0.75rem; margin-right: 0.25rem;" onclick="updateBookingStatus(${b.id}, 'confirmed')">bevestig</button>
-                      <button class="btn btn-secondary" style="font-size: 0.75rem;" onclick="updateBookingStatus(${b.id}, 'cancelled')">annuleer</button>
-                    </span>`
-                : ''}
+            <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem;">
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; color: rgba(255,255,255,0.9);">${b.name}</div>
+                  <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">${b.program}</div>
+                  <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">${b.time} – ${b.status.toUpperCase()}</div>
+                </div>
+                ${b.status === 'pending'
+                  ? `<div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                      <button class="btn btn-primary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'confirmed')">bevestig</button>
+                      <button class="btn btn-secondary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'cancelled')">annuleer</button>
+                    </div>`
+                  : ''}
+              </div>
             </li>
           `).join('')}
         </ul>

@@ -1,0 +1,59 @@
+.admin-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      min-height: 80vh;
+    }
+    
+    .pin-container {
+      max-width: 400px;
+      margin: 8rem auto;
+      text-align: center;
+    }
+    
+    .pin-input {
+      width: 100%;
+      text-align: center;
+      font-size: 1.5rem;
+      letter-spacing: 0.5rem;
+      padding: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .blocked-dates-list {
+      background-color: #161616;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .blocked-date-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .blocked-date-item:last-child {
+      border-bottom: none;
+    }
+    
+    .remove-btn {
+      background-color: rgba(255, 0, 0, 0.2);
+      color: #ff6b6b;
+      border: 1px solid rgba(255, 0, 0, 0.3);
+      padding: 0.4rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .remove-btn:hover {
+      background-color: rgba(255, 0, 0, 0.3);
+    }
