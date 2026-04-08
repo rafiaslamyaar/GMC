@@ -402,8 +402,42 @@ try {
 
     function renderBookingSummary() {
       const container = document.getElementById('bookingSummary');
+
+      if (DB_BOOKINGS.length === 0) {
+        container.innerHTML = `<p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">Er zijn nog geen boekingen.</p>`;
+        return;
+      }
+
       if (!selectedDate) {
-        container.innerHTML = `<p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">Selecteer een datum in de kalender om alle boekingen te zien.</p>`;
+        container.innerHTML = `
+          <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+            <strong>Alle boekingen (${DB_BOOKINGS.length})</strong>
+          </div>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">Scroll door de volledige boekingslijst of kies een datum in de kalender om deze specifieke dag te bekijken.</p>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            ${DB_BOOKINGS.map(b => {
+              const bookingDate = new Date(b.date + 'T00:00:00');
+              return `
+                <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 220px;">
+                      <div style="font-weight: 600; color: rgba(255,255,255,0.9);">${b.name}</div>
+                      <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">${b.program}</div>
+                      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">${formatDateDisplay(bookingDate)} · ${b.time}</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                      <span style="font-size: 0.8rem; color: rgba(255,255,255,0.7); text-transform: uppercase;">${b.status}</span>
+                      ${b.status === 'pending'
+                        ? `<button class="btn btn-primary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'confirmed')">bevestig</button>
+                           <button class="btn btn-secondary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'cancelled')">annuleer</button>`
+                        : ''}
+                    </div>
+                  </div>
+                </li>
+              `;
+            }).join('')}
+          </ul>
+        `;
         return;
       }
 
