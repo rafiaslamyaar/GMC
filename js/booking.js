@@ -210,7 +210,12 @@ function submitBooking(event) {
     method: 'POST',
     body: formData
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
   .then(data => {
     if (data.success) {
       document.getElementById('bookingContent').innerHTML = `
@@ -234,8 +239,8 @@ function submitBooking(event) {
     }
   })
   .catch(err => {
-    console.error(err);
-    alert('Fout bij serververzoek. Controleer de console voor details.');
+    console.error('Booking submission error:', err);
+    alert('Fout bij serververzoek: ' + err.message + '. Controleer de console voor details.');
   });
 }
 

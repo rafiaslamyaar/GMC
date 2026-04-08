@@ -117,8 +117,8 @@ try {
         <span>Boeking</span>
       </div>
       <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; margin-bottom: 1rem;">
-        BOEK JE<br>
-        <span class="highlight">SESSIE</span>
+        BOEK JE SESSIE<br>
+        
       </h1>
       <p style="color: rgba(255, 255, 255, 0.5); max-width: 600px;">
         Kies een datum en tijd en vul je gegevens in. Mark bevestigt binnen 24 uur.
