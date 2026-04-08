@@ -128,7 +128,7 @@ try {
 
   <!-- Admin Panel (Hidden) -->
   <div id="adminPanel" class="admin-container hidden">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 0.75rem;">
       <div>
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">
           ADMIN <span class="highlight">KALENDER</span>
@@ -137,9 +137,12 @@ try {
           Blokkeer datums wanneer je niet beschikbaar bent
         </p>
       </div>
-      <button onclick="logout()" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">
-        UITLOGGEN
-      </button>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="admin-bookings.php" class="btn btn-primary" style="padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; justify-content: center;">BOEKINGEN</a>
+        <button onclick="logout()" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">
+          UITLOGGEN
+        </button>
+      </div>
     </div>
     
     <!-- Calendar -->
@@ -182,16 +185,6 @@ try {
       <div id="blockedDatesList">
         <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
           Nog geen geblokkeerde datums. Klik in de kalender om een datum te blokkeren.
-        </p>
-      </div>
-    </div>
-
-    <!-- Booking Summary -->
-    <div class="blocked-dates-list">
-      <h3 style="font-weight: 700; margin-bottom: 1rem;">Boekingsoverzicht</h3>
-      <div id="bookingSummary">
-        <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
-          Selecteer een datum in de kalender om alle boekingen te zien.
         </p>
       </div>
     </div>
@@ -254,7 +247,6 @@ try {
         document.getElementById('adminPanel').classList.remove('hidden');
         renderCalendar();
         renderBlockedList();
-        renderBookingSummary();
       } else {
         alert('Foute PIN. Probeer het opnieuw.\n\nDemo PIN: 1234');
         document.getElementById('pinInput').value = '';
@@ -318,14 +310,13 @@ try {
 
         daysContainer.appendChild(dayBtn);
       }
-      renderBookingSummary();
     }
 
     function selectDate(date) {
       if (isPastDate(date)) return;
       selectedDate = date;
       renderCalendar();
-      renderBookingSummary();
+      renderBlockedList();
     }
 
     async function toggleBlockDate(date) {
@@ -341,36 +332,6 @@ try {
       selectedDate = date;
       renderCalendar();
       renderBlockedList();
-      renderBookingSummary();
-    }
-
-    async function updateBookingStatus(bookingId, newStatus) {
-      const formData = new FormData();
-      formData.append('id', bookingId);
-      formData.append('status', newStatus);
-
-      const response = await fetch('../pages/admin-booking-update.php', {
-        method: 'POST',
-        body: formData
-      });
-
-      const data = await response.json();
-      if (!data.success) {
-        alert(data.error || 'Status update mislukt.');
-        return false;
-      }
-
-      // update in-memory state en UI
-      const bookingIndex = DB_BOOKINGS.findIndex(b => b.id === bookingId);
-      if (bookingIndex > -1) {
-        if (newStatus === 'cancelled') {
-          DB_BOOKINGS.splice(bookingIndex, 1);
-        } else {
-          DB_BOOKINGS[bookingIndex].status = newStatus;
-        }
-      }
-      renderBookingSummary();
-      return true;
     }
 
     function renderBlockedList() {
@@ -380,107 +341,45 @@ try {
 
       count.textContent = blocked.length;
 
-      if (blocked.length === 0) {
-        container.innerHTML = `
+      let html = '';
+
+      // Show selected date block/unblock option if a date is selected
+      if (selectedDate) {
+        const blocked = isDateBlocked(selectedDate);
+        const statusBtn = blocked
+          ? `<button class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="toggleBlockDate(selectedDate)">Deblokkeren</button>`
+          : `<button class="btn btn-primary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;" onclick="toggleBlockDate(selectedDate)">Blokkeren</button>`;
+
+        html += `
+          <div class="blocked-date-item" style="border-bottom: 2px solid #e8580a; background-color: rgba(232, 88, 10, 0.1);">
+            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span style="color: white; font-weight: 600;">${formatDateDisplay(selectedDate)}</span>
+              <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">${blocked ? 'Geblokkeerd' : 'Beschikbaar'}</span>
+            </div>
+            ${statusBtn}
+          </div>
+        `;
+      }
+
+      if (blocked.length === 0 && !selectedDate) {
+        html += `
           <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
             Nog geen geblokkeerde datums. Klik in de kalender om een datum te blokkeren.
           </p>
         `;
-        return;
+      } else {
+        html += blocked.map(dateStr => {
+          const date = new Date(dateStr + 'T00:00:00');
+          return `
+            <div class="blocked-date-item">
+              <span style="color: rgba(255, 255, 255, 0.8);">${formatDateDisplay(date)}</span>
+              <button class="remove-btn" onclick="unblockDate('${dateStr}')">DEBLOKKEER</button>
+            </div>
+          `;
+        }).join('');
       }
 
-      container.innerHTML = blocked.map(dateStr => {
-        const date = new Date(dateStr + 'T00:00:00');
-        return `
-          <div class="blocked-date-item">
-            <span style="color: rgba(255, 255, 255, 0.8);">${formatDateDisplay(date)}</span>
-            <button class="remove-btn" onclick="unblockDate('${dateStr}')">DEBLOKKEER</button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function renderBookingSummary() {
-      const container = document.getElementById('bookingSummary');
-
-      if (DB_BOOKINGS.length === 0) {
-        container.innerHTML = `<p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">Er zijn nog geen boekingen.</p>`;
-        return;
-      }
-
-      if (!selectedDate) {
-        container.innerHTML = `
-          <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
-            <strong>Alle boekingen (${DB_BOOKINGS.length})</strong>
-          </div>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">Scroll door de volledige boekingslijst of kies een datum in de kalender om deze specifieke dag te bekijken.</p>
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            ${DB_BOOKINGS.map(b => {
-              const bookingDate = new Date(b.date + 'T00:00:00');
-              return `
-                <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                  <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 220px;">
-                      <div style="font-weight: 600; color: rgba(255,255,255,0.9);">${b.name}</div>
-                      <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">${b.program}</div>
-                      <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">${formatDateDisplay(bookingDate)} · ${b.time}</div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-                      <span style="font-size: 0.8rem; color: rgba(255,255,255,0.7); text-transform: uppercase;">${b.status}</span>
-                      ${b.status === 'pending'
-                        ? `<button class="btn btn-primary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'confirmed')">bevestig</button>
-                           <button class="btn btn-secondary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'cancelled')">annuleer</button>`
-                        : ''}
-                    </div>
-                  </div>
-                </li>
-              `;
-            }).join('')}
-          </ul>
-        `;
-        return;
-      }
-
-      const dateStr = formatDate(selectedDate);
-      const dayBookings = DB_BOOKINGS.filter(b => b.date === dateStr);
-      const blocked = isDateBlocked(selectedDate);
-
-      const statusBtn = blocked
-        ? `<button class="btn btn-secondary" style="width: 100%; margin-bottom: 1rem;" onclick="toggleBlockDate(selectedDate)">Deblokkeren</button>`
-        : `<button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;" onclick="toggleBlockDate(selectedDate)">Blokkeren</button>`;
-
-      if (dayBookings.length === 0) {
-        container.innerHTML = `
-          <div style="margin-bottom: 1rem;"><strong>${formatDateDisplay(selectedDate)}</strong></div>
-          ${statusBtn}
-          <p style="text-align: center; color: rgba(255, 255, 255, 0.7); padding: 1rem 0;">Geen boekingen voor deze datum.</p>
-        `;
-        return;
-      }
-
-      container.innerHTML = `
-        <div style="margin-bottom: 1rem;"><strong>${formatDateDisplay(selectedDate)}</strong></div>
-        ${statusBtn}
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          ${dayBookings.map(b => `
-            <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem;">
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; color: rgba(255,255,255,0.9);">${b.name}</div>
-                  <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">${b.program}</div>
-                  <div style="font-size: 0.8rem; color: rgba(255,255,255,0.6);">${b.time} – ${b.status.toUpperCase()}</div>
-                </div>
-                ${b.status === 'pending'
-                  ? `<div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                      <button class="btn btn-primary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'confirmed')">bevestig</button>
-                      <button class="btn btn-secondary" style="font-size: 0.7rem; padding: 0.3rem 0.6rem;" onclick="updateBookingStatus(${b.id}, 'cancelled')">annuleer</button>
-                    </div>`
-                  : ''}
-              </div>
-            </li>
-          `).join('')}
-        </ul>
-      `;
+      container.innerHTML = html;
     }
 
     async function unblockDate(dateStr) {
@@ -490,7 +389,6 @@ try {
       selectedDate = null;
       renderCalendar();
       renderBlockedList();
-      renderBookingSummary();
     }
 
     function previousMonth() {
