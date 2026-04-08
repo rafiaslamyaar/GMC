@@ -15,10 +15,7 @@
             Professionele personal training in Nederland.
             Lichamen en geesten transformeren sinds 2010.
           </p>
-          <div class="social-links">
-            <a href="#" class="social-link">📷</a>
-            <a href="#" class="social-link">👍</a>
-          </div>
+          
         </div>
         
         <div class="quick-links">
