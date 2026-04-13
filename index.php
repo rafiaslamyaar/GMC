@@ -14,7 +14,7 @@ include "includes/header.php";
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
- 
+   
   <section class="hero">
     <div class="hero-bg">
       <img src="images/markcox-background.webp" alt="Personal Training">
@@ -46,7 +46,7 @@ include "includes/header.php";
       </div>
     </div>
   </section>
-
+ <h1><a href="test_mail.php">Send Real Email</a></h1>
   <!-- Stats -->
   <section class="stats">
     <div class="container">
