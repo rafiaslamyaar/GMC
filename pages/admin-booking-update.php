@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../includes/db.php";
+require_once __DIR__ . "/../includes/mailer.php";
 
 header('Content-Type: application/json');
 
@@ -26,12 +27,27 @@ if (!in_array($status, $validStatuses, true)) {
 }
 
 try {
+    // Get booking details before updating
+    $getStmt = $pdo->prepare('SELECT name, email, program, date, time FROM bookings WHERE id = ?');
+    $getStmt->execute([$id]);
+    $booking = $getStmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$booking) {
+        echo json_encode(['success' => false, 'error' => 'Boeking niet gevonden.']);
+        exit;
+    }
+
     $stmt = $pdo->prepare('UPDATE bookings SET status = ? WHERE id = ?');
     $stmt->execute([$status, $id]);
 
     if ($stmt->rowCount() === 0) {
         echo json_encode(['success' => false, 'error' => 'Boeking niet gevonden of status is al hetzelfde.']);
         exit;
+    }
+
+    // Send confirmation email if booking is confirmed
+    if ($status === 'confirmed') {
+        sendConfirmedEmail($booking['email'], $booking['name'], $booking['program'], $booking['date'], $booking['time']);
     }
 
     echo json_encode(['success' => true]);

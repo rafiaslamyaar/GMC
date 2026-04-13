@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/mailer.php';
 
 $name = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
@@ -41,6 +42,9 @@ try {
 
     $insertStmt = $pdo->prepare('INSERT INTO bookings (name, email, phone, program, notes, date, time, status) VALUES (?, ?, ?, ?, ?, ?, ?, "pending")');
     $insertStmt->execute([$name, $email, $phone, $program, $notes, $date, $time]);
+
+    // Send pending email to customer
+    sendPendingEmail($email, $name, $program, $date, $time);
 
     echo json_encode(['success' => true]);
 } catch (PDOException $e) {
