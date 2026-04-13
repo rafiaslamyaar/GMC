@@ -25,12 +25,12 @@
         </div>
       </a>
       
-      <nav>
-        <a href="../index.php">Home</a>
-        <a href="../pages/about.php">Over</a>
-        <a href="../pages/services.php">Diensten</a>
-        <a href="../pages/booking.php" class="btn-primary">Boek nu</a>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="../index.php">Home</a></li>
+        <li><a href="../pages/about.php">Over</a></li>
+        <li><a href="../pages/services.php">Diensten</a></li>
+        <li><a href="../pages/booking.php" class="btn-primary">Boek nu</a></li>
+      </ul>
       
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </div>

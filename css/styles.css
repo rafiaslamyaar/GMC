@@ -95,13 +95,14 @@ header.scrolled {
   font-weight: 600;
 }
 
-nav {
+.nav-links {
   display: flex;
   align-items: center;
   gap: 2rem;
+  list-style: none;
 }
 
-nav a {
+.nav-links a {
   position: relative;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.7);
@@ -113,12 +114,12 @@ nav a {
   padding: 0.5rem 0;
 }
 
-nav a:hover,
-nav a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: white;
 }
 
-nav a.active::after {
+.nav-links a.active::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -129,7 +130,7 @@ nav a.active::after {
   border-radius: 2px;
 }
 
-nav a.btn-primary {
+.nav-links a.btn-primary {
   background-color: #e8580a;
   color: white !important;
   padding: 0.5rem 1.25rem;
@@ -137,12 +138,12 @@ nav a.btn-primary {
   transition: all 0.2s;
 }
 
-nav a.btn-primary:hover {
+.nav-links a.btn-primary:hover {
   background-color: #ff6a1a;
   box-shadow: 0 0 20px rgba(232, 88, 10, 0.4);
 }
 
-nav a.btn-primary::after {
+.nav-links a.btn-primary::after {
   display: none;
 }
 

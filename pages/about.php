@@ -9,7 +9,7 @@ include "../includes/header.php";
   <title>Over Mark Cox - Personal Trainer Amsterdam</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
  
