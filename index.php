@@ -89,9 +89,7 @@ include "includes/header.php";
             JOUW <span class="highlight">KAMPIOEN</span>
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
-            Mark Cox is een gecertificeerde personal trainer in Amsterdam met meer dan 15 jaar ervaring
-            in het transformeren van levens. Zijn filosofie combineert onderbouwde trainingsmethodes
-            met een persoonlijk aanpak.
+           Ik ben geboren en getogen in Zeist waar ik in mijn jeugd bij hockey club Schaerweijde en tennis club Shot heb gespeeld. Eigenlijk staat mijn hele leven in het teken van sporten en een gezonde levensstijl. Ik heb een tijd gereisd en veel ervaringen opgedaan. Inmiddels woon ik weer in de omgeving van Zeist en heb mijn eigen gym ingericht waar ik met veel plezier aan het werk ben om iedereen die dat wil te motiveren en te begeleiden. Opgeleid en gespecialiseerd in Fitness Nutrition, Kracht en Conditie training en Corrective Excercises. Graag deel ik mijn ervaringen met jou, om dagelijks met heel veel plezier, effectief en efficiënt te bewegen. 
           </p>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem;">
             Of je nu net begint of je prestaties wil verbeteren, Mark maakt gepersonaliseerde programma's
