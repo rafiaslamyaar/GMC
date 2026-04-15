@@ -28,6 +28,41 @@ function setActiveNav() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
   setActiveNav();
+
+  // AJAX navigation - DISABLED due to incomplete implementation
+  /*
+  document.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' && (e.target.classList.contains('nav-link') || e.target.href.includes('pages/') || e.target.href.includes('booking.php')) && !e.target.href.includes('admin-')) {
+      e.preventDefault();
+      let url = e.target.href;
+      if (!url.includes('?')) url += '?ajax=1';
+      else url += '&ajax=1';
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          document.getElementById('main-content').innerHTML = html;
+          history.pushState(null, '', e.target.href);
+          setActiveNav(); // update active nav
+        })
+        .catch(err => console.error('Error loading page:', err));
+    }
+  });
+
+  // Handle back/forward buttons
+  window.addEventListener('popstate', () => {
+    const url = window.location.href;
+    let ajaxUrl = url;
+    if (!ajaxUrl.includes('?')) ajaxUrl += '?ajax=1';
+    else ajaxUrl += '&ajax=1';
+    fetch(ajaxUrl)
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('main-content').innerHTML = html;
+        setActiveNav();
+      })
+      .catch(err => console.error('Error loading page:', err));
+  });
+  */
 });
 
 // LocalStorage helper functions

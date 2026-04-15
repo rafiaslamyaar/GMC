@@ -14,7 +14,7 @@
 <body>
     <header>
     <div class="navbar">
-      <a href="index.html" class="logo">
+      <a href="../index.php" class="logo">
         <div class="logo-icon">
           
           <img src="../images/markcox-logo.png" alt="Mark Cox Training">
@@ -25,12 +25,12 @@
         </div>
       </a>
       
-      <nav>
-        <a href="../index.php">Home</a>
-        <a href="../pages/about.php">Over</a>
-        <a href="../pages/services.php">Diensten</a>
-        <a href="../pages/booking.php" class="btn-primary">Boek nu</a>
-      </nav>
+      <ul class="nav-links">
+        <li><a href="../index.php">Home</a></li>
+        <li><a href="../pages/about.php">Over</a></li>
+        <li><a href="../pages/services.php">Diensten</a></li>
+        <li><a href="../pages/booking.php" class="btn-primary">Boek nu</a></li>
+      </ul>
       
       <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </div>

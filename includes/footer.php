@@ -14,10 +14,7 @@
           <p class="text-footer">
             Professionele personal training in Soesterberg.
           </p>
-          <div class="social-links">
-            <a href="#" class="social-link">📷</a>
-            <a href="#" class="social-link">👍</a>
-          </div>
+          
         </div>
         
         <div class="quick-links">
@@ -33,7 +30,7 @@
         <div class="contact">
           <h4>Contact</h4>
           <ul>
-            <li>📞 +31 6 12 34 56 78</li>
+            <li>📞 +31 6 121 971 66</li>
             <li>✉️ markcoxtraining@gmail.com</li>
             <li>📍 Postweg 55C, Soesterberg</li>
           </ul>

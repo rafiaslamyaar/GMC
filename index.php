@@ -11,10 +11,10 @@ include "includes/header.php";
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
- 
+   
   <section class="hero">
     <div class="hero-bg">
       <img src="images/markcox-background.webp" alt="Personal Training">
@@ -46,7 +46,6 @@ include "includes/header.php";
       </div>
     </div>
   </section>
-
   <!-- Stats -->
   <section class="stats">
     <div class="container">
@@ -89,11 +88,10 @@ include "includes/header.php";
             JOUW <span class="highlight">KAMPIOEN</span>
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
-           Ik ben geboren en getogen in Zeist waar ik in mijn jeugd bij hockey club Schaerweijde en tennis club Shot heb gespeeld. Eigenlijk staat mijn hele leven in het teken van sporten en een gezonde levensstijl. Ik heb een tijd gereisd en veel ervaringen opgedaan. Inmiddels woon ik weer in de omgeving van Zeist en heb mijn eigen gym ingericht waar ik met veel plezier aan het werk ben om iedereen die dat wil te motiveren en te begeleiden. Opgeleid en gespecialiseerd in Fitness Nutrition, Kracht en Conditie training en Corrective Excercises. Graag deel ik mijn ervaringen met jou, om dagelijks met heel veel plezier, effectief en efficiënt te bewegen. 
+            Ik ben geboren en getogen in Zeist waar ik in mijn jeugd bij hockey club Schaerweijde en tennis club Shot heb gespeeld. Eigenlijk staat mijn hele leven in het teken van sporten en een gezonde levensstijl. Ik heb een tijd gereisd en veel ervaringen opgedaan. Inmiddels woon ik weer in de omgeving van Zeist en heb mijn eigen gym ingericht waar ik met veel plezier aan het werk ben om iedereen die dat wil te motiveren en te begeleiden.
           </p>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem;">
-            Of je nu net begint of je prestaties wil verbeteren, Mark maakt gepersonaliseerde programma's
-            die echte, blijvende resultaten opleveren.
+            Opgeleid en gespecialiseerd in Fitness Nutrition, Kracht en Conditie training en Corrective Excercises. Graag deel ik mijn ervaringen met jou, om dagelijks met heel veel plezier, effectief en efficiënt te bewegen.
           </p>
           <a href="about.php" class="btn btn-primary">
             MEER OVER MARK LEZEN →

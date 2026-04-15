@@ -1,6 +1,22 @@
 ﻿
 <?php
 include "../includes/header.php";
+require_once __DIR__ . "/../includes/db.php";
+
+$blockedDates = [];
+$existingBookings = [];
+
+try {
+    $stmt = $pdo->query('SELECT blocked_date FROM blocked_dates ORDER BY blocked_date');
+    $blockedDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $stmt2 = $pdo->query('SELECT id, date, time, status, name, program FROM bookings WHERE status <> "cancelled" ORDER BY date, time');
+    $existingBookings = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // Geef fallback als DB faalt
+    $blockedDates = [];
+    $existingBookings = [];
+}
 ?>
 
 
@@ -13,7 +29,9 @@ include "../includes/header.php";
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/admin-calendar.css">
+
   <style>
     .admin-container {
       max-width: 900px;
@@ -110,7 +128,7 @@ include "../includes/header.php";
 
   <!-- Admin Panel (Hidden) -->
   <div id="adminPanel" class="admin-container hidden">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 0.75rem;">
       <div>
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">
           ADMIN <span class="highlight">KALENDER</span>
@@ -119,9 +137,12 @@ include "../includes/header.php";
           Blokkeer datums wanneer je niet beschikbaar bent
         </p>
       </div>
-      <button onclick="logout()" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">
-        UITLOGGEN
-      </button>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="admin-bookings.php" class="btn btn-primary" style="padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; justify-content: center;">BOEKINGEN</a>
+        <button onclick="logout()" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">
+          UITLOGGEN
+        </button>
+      </div>
     </div>
     
     <!-- Calendar -->
@@ -171,153 +192,10 @@ include "../includes/header.php";
 
  
 
-  <script src="main.js"></script>
   <script>
-    const CORRECT_PIN = '1234';
-    let currentMonth = new Date();
-    let selectedDate = null;
-    
-    function handlePinEnter(event) {
-      if (event.key === 'Enter') {
-        checkPin();
-      }
-    }
-    
-    function checkPin() {
-      const pin = document.getElementById('pinInput').value;
-      if (pin === CORRECT_PIN) {
-        document.getElementById('pinContainer').classList.add('hidden');
-        document.getElementById('adminPanel').classList.remove('hidden');
-        renderCalendar();
-        renderBlockedList();
-      } else {
-        alert('Foute PIN. Probeer het opnieuw.\n\nDemo PIN: 1234');
-        document.getElementById('pinInput').value = '';
-      }
-    }
-    
-    function logout() {
-      document.getElementById('adminPanel').classList.add('hidden');
-      document.getElementById('pinContainer').classList.remove('hidden');
-      document.getElementById('pinInput').value = '';
-    }
-
-    function renderCalendar() {
-      const year = currentMonth.getFullYear();
-      const month = currentMonth.getMonth();
-      
-      document.getElementById('monthTitle').textContent = getMonthName(currentMonth);
-      
-      const daysInMonth = getDaysInMonth(year, month);
-      const firstDay = getFirstDayOfMonth(year, month);
-      
-      const daysContainer = document.getElementById('calendarDays');
-      daysContainer.innerHTML = '';
-      
-      for (let i = 0; i < firstDay; i++) {
-        const emptyDay = document.createElement('button');
-        emptyDay.className = 'calendar-day outside';
-        emptyDay.disabled = true;
-        daysContainer.appendChild(emptyDay);
-      }
-      
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day);
-        const dayBtn = document.createElement('button');
-        dayBtn.className = 'calendar-day';
-        dayBtn.textContent = day;
-        
-        const blocked = isDateBlocked(date);
-        const past = isPastDate(date);
-        const today = isToday(date);
-        
-        if (blocked) {
-          dayBtn.classList.add('blocked');
-        }
-        
-        if (past && !blocked) {
-          dayBtn.disabled = true;
-        }
-        
-        if (today && !blocked) {
-          dayBtn.classList.add('today');
-        }
-        
-        if (selectedDate && isSameDate(date, selectedDate)) {
-          dayBtn.classList.add('selected');
-        }
-        
-        dayBtn.onclick = () => toggleBlockDate(date);
-        daysContainer.appendChild(dayBtn);
-      }
-    }
-
-    function toggleBlockDate(date) {
-      if (isPastDate(date)) return;
-
-      const dateStr = formatDate(date);
-      const blocked = getBlockedDates();
-
-      if (blocked.includes(dateStr)) {
-        removeBlockedDate(dateStr);
-      } else {
-        addBlockedDate(dateStr);
-      }
-
-      selectedDate = date;
-      renderCalendar();
-      renderBlockedList();
-    }
-
-    function renderBlockedList() {
-      const blocked = getBlockedDates();
-      const container = document.getElementById('blockedDatesList');
-      const count = document.getElementById('blockedCount');
-
-      count.textContent = blocked.length;
-
-      if (blocked.length === 0) {
-        container.innerHTML = `
-          <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
-            Nog geen geblokkeerde datums. Klik in de kalender om een datum te blokkeren.
-          </p>
-        `;
-        return;
-      }
-
-      const sorted = blocked.sort((a, b) => new Date(a) - new Date(b));
-
-      container.innerHTML = sorted.map(dateStr => {
-        const date = new Date(dateStr + 'T00:00:00');
-        return `
-          <div class="blocked-date-item">
-            <span style="color: rgba(255, 255, 255, 0.8);">${formatDateDisplay(date)}</span>
-            <button class="remove-btn" onclick="unblockDate('${dateStr}')">DEBLOKKEER</button>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function unblockDate(dateStr) {
-      removeBlockedDate(dateStr);
-      selectedDate = null;
-      renderCalendar();
-      renderBlockedList();
-    }
-
-    function previousMonth() {
-      currentMonth.setMonth(currentMonth.getMonth() - 1);
-      renderCalendar();
-    }
-
-    function nextMonth() {
-      currentMonth.setMonth(currentMonth.getMonth() + 1);
-      renderCalendar();
-    }
+    // Pass PHP data to JavaScript
+    window.DB_BLOCKED_DATES = new Set(<?= json_encode($blockedDates) ?>);
+    window.DB_BOOKINGS = <?= json_encode($existingBookings) ?>;
   </script>
-</body>
-</html>
-<?php
-include '../includes/footer.php';
-?>
-
+  <script src="../js/main.js"></script>
+  <script src="../js/admin-calendar.js"></script>

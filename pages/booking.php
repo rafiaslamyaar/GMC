@@ -1,5 +1,21 @@
 ﻿<?php
 include "../includes/header.php";
+require_once __DIR__ . "/../includes/db.php";
+
+$blockedDates = [];
+$bookedSlots = [];
+
+try {
+    $stmt = $pdo->query('SELECT blocked_date FROM blocked_dates');
+    $blockedDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    $stmt2 = $pdo->query('SELECT date, time FROM bookings WHERE status <> "cancelled"');
+    $bookedSlots = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    // fallback if DB unavailable
+    $blockedDates = [];
+    $bookedSlots = [];
+}
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -10,7 +26,8 @@ include "../includes/header.php";
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/booking.css">
   <style>
     .page-hero {
       padding: 8rem 0 4rem;
@@ -78,6 +95,12 @@ include "../includes/header.php";
       margin: 0 auto 2rem;
       font-size: 2.5rem;
     }
+
+    .calendar-day.partially-booked {
+      background: rgba(232, 88, 10, 0.12);
+      border-color: rgba(232, 88, 10, 0.5);
+      color: #fff;
+    }
     
     @media (max-width: 1023px) {
       .booking-grid {
@@ -94,8 +117,8 @@ include "../includes/header.php";
         <span>Boeking</span>
       </div>
       <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; margin-bottom: 1rem;">
-        BOEK JE<br>
-        <span class="highlight">SESSIE</span>
+        BOEK JE SESSIE<br>
+        
       </h1>
       <p style="color: rgba(255, 255, 255, 0.5); max-width: 600px;">
         Kies een datum en tijd en vul je gegevens in. Mark bevestigt binnen 24 uur.
@@ -132,6 +155,10 @@ include "../includes/header.php";
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <div style="width: 12px; height: 12px; background-color: #e8580a; border-radius: 4px;"></div>
             <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Geselecteerd</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <div style="width: 12px; height: 12px; background-color: rgba(232, 88, 10, 0.25); border-radius: 4px;"></div>
+            <span style="color: rgba(255, 255, 255, 0.5); font-size: 0.72rem;">Gedeeltelijk geboekt</span>
           </div>
           <div style="display: flex; align-items: center; gap: 0.5rem;">
             <div style="width: 12px; height: 12px; background-color: rgba(139, 0, 0, 0.5); border-radius: 4px;"></div>
@@ -192,11 +219,12 @@ include "../includes/header.php";
               <label class="form-label">Programma *</label>
               <select class="form-select" id="programInput" required>
                 <option value="" disabled selected>Kies een programma</option>
-                <option value="1-op-1 Personal Training">1-op-1 Personal Training</option>
-                <option value="Outdoor Bootcamp">Outdoor Bootcamp</option>
-                <option value="Kracht & Prestaties">Kracht & Prestaties</option>
-                <option value="Voedingscoaching">Voedingscoaching</option>
-                <option value="Gratis consult">Gratis consult</option>
+                <option value="Personal Training - 1x per week">Personal Training - 1x per week</option>
+                <option value="Personal Training - 2x per week">Personal Training - 2x per week</option>
+                <option value="Personal Training - 3x per week">Personal Training - 3x per week</option>
+                <option value="Group Training - 1x per week">Group Training - 1x per week</option>
+                <option value="Group Training - 2x per week">Group Training - 2x per week</option>
+                <option value="Group Training - 3x per week">Group Training - 3x per week</option>
               </select>
             </div>
             
@@ -212,6 +240,8 @@ include "../includes/header.php";
               <button type="submit" class="btn btn-primary" style="flex: 2;">
                 BEVESTIG BOEKING ✓
               </button>
+              <a href="admin-calendar.php" class="btn btn-secondary">Admin Calendar</a>
+
             </div>
           </form>
         </div>
@@ -219,182 +249,13 @@ include "../includes/header.php";
     </div>
   </div>
 
-  <script src="main.js"></script>
   <script>
-    // Booking state
-    let currentMonth = new Date();
-    let selectedDate = null;
-    let selectedTime = null;
-    
-    const TIME_SLOTS = [
-      '07:00', '08:00', '09:00', '10:00', '11:00',
-      '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'
-    ];
-    
-    // Initialize calendar
-    function renderCalendar() {
-      const year = currentMonth.getFullYear();
-      const month = currentMonth.getMonth();
-      
-      document.getElementById('monthTitle').textContent = getMonthName(currentMonth);
-      
-      const daysInMonth = getDaysInMonth(year, month);
-      const firstDay = getFirstDayOfMonth(year, month);
-      
-      const daysContainer = document.getElementById('calendarDays');
-      daysContainer.innerHTML = '';
-      
-      for (let i = 0; i < firstDay; i++) {
-        const emptyDay = document.createElement('button');
-        emptyDay.className = 'calendar-day outside';
-        emptyDay.disabled = true;
-        daysContainer.appendChild(emptyDay);
-      }
-      
-      for (let day = 1; day <= daysInMonth; day++) {
-        const date = new Date(year, month, day);
-        const dateStr = formatDate(date);
-        const dayBtn = document.createElement('button');
-        dayBtn.className = 'calendar-day';
-        dayBtn.textContent = day;
-        
-        const blocked = isDateBlocked(date);
-        const past = isPastDate(date);
-        const today = isToday(date);
-        
-        if (blocked) {
-          dayBtn.classList.add('blocked');
-          dayBtn.disabled = true;
-        } else if (past) {
-          dayBtn.disabled = true;
-        }
-        
-        if (today && !blocked) {
-          dayBtn.classList.add('today');
-        }
-        
-        if (selectedDate && isSameDate(date, selectedDate)) {
-          dayBtn.classList.add('selected');
-        }
-        
-        dayBtn.onclick = () => selectDate(date);
-        daysContainer.appendChild(dayBtn);
-      }
-    }
-    
-    function selectDate(date) {
-      if (isPastDate(date) || isDateBlocked(date)) return;
-      
-      selectedDate = date;
-      selectedTime = null;
-      renderCalendar();
-      renderTimeSlots();
-    }
-    
-    function renderTimeSlots() {
-      const container = document.getElementById('timeSlotContainer');
-      const dateTitle = document.getElementById('dateTitle');
-      const continueBtn = document.getElementById('continueBtn');
-      
-      if (!selectedDate) {
-        container.innerHTML = `
-          <div style="text-align: center; padding: 3rem 1rem;">
-            <div style="font-size: 3rem; opacity: 0.2; margin-bottom: 1rem;">📅</div>
-            <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.85rem;">
-              Kies een dag in de kalender om beschikbare tijden te zien
-            </p>
-          </div>
-        `;
-        dateTitle.textContent = 'Kies eerst een datum';
-        continueBtn.style.display = 'none';
-        return;
-      }
-      
-      dateTitle.textContent = formatDateDisplay(selectedDate);
-      
-      container.innerHTML = '<div class="time-slots"></div>';
-      const slotsGrid = container.querySelector('.time-slots');
-      
-      TIME_SLOTS.forEach(slot => {
-        const btn = document.createElement('button');
-        btn.className = 'time-slot';
-        btn.textContent = slot;
-        btn.onclick = () => selectTime(slot);
-        if (selectedTime === slot) {
-          btn.classList.add('selected');
-        }
-        slotsGrid.appendChild(btn);
-      });
-      
-      continueBtn.style.display = selectedTime ? 'block' : 'none';
-    }
-    
-    function selectTime(time) {
-      selectedTime = time;
-      renderTimeSlots();
-    }
-    
-    function showBookingForm() {
-      if (!selectedDate || !selectedTime) return;
-      
-      document.getElementById('calendarContainer').parentElement.style.display = 'none';
-      document.getElementById('bookingForm').classList.remove('hidden');
-      document.getElementById('formDateDisplay').textContent = formatDateDisplay(selectedDate);
-      document.getElementById('formTimeDisplay').textContent = `om ${selectedTime}`;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    function backToCalendar() {
-      document.getElementById('calendarContainer').parentElement.style.display = 'grid';
-      document.getElementById('bookingForm').classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    function submitBooking(event) {
-      event.preventDefault();
-      
-      const name = document.getElementById('nameInput').value;
-      const email = document.getElementById('emailInput').value;
-      const phone = document.getElementById('phoneInput').value;
-      const program = document.getElementById('programInput').value;
-      const notes = document.getElementById('notesInput').value;
-      
-      document.getElementById('bookingContent').innerHTML = `
-        <div class="success-message">
-          <div class="success-icon">✓</div>
-          <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">BOEKING BEVESTIGD!</h2>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.7;">
-            Bedankt <span style="color: white;">${name}</span>! Je sessie is aangevraagd voor 
-            <span style="color: #e8580a;">${formatDateDisplay(selectedDate)} om ${selectedTime}</span>.
-          </p>
-          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.9rem; margin-bottom: 2rem;">
-            Mark bevestigt je afspraak per e-mail naar <strong style="color: rgba(255, 255, 255, 0.7);">${email}</strong> binnen 24 uur.
-          </p>
-          <button onclick="location.reload()" class="btn btn-primary">
-            BOEK NOG EEN SESSIE
-          </button>
-        </div>
-      `;
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    function previousMonth() {
-      currentMonth.setMonth(currentMonth.getMonth() - 1);
-      renderCalendar();
-    }
-    
-    function nextMonth() {
-      currentMonth.setMonth(currentMonth.getMonth() + 1);
-      renderCalendar();
-    }
-    
-    // Initialize on load
-    document.addEventListener('DOMContentLoaded', () => {
-      renderCalendar();
-      renderTimeSlots();
-    });
+    // Pass PHP data to JavaScript
+    window.DB_BLOCKED_DATES = new Set(<?= json_encode($blockedDates) ?>);
+    window.DB_BOOKED_SLOTS = <?= json_encode($bookedSlots) ?>;
   </script>
+  <script src="../js/main.js"></script>
+  <script src="../js/booking.js"></script>
 </body>
 </html>
 <?php
