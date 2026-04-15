@@ -29,9 +29,10 @@ function setActiveNav() {
 document.addEventListener('DOMContentLoaded', () => {
   setActiveNav();
 
-  // AJAX navigation
+  // AJAX navigation - DISABLED due to incomplete implementation
+  /*
   document.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A' && (e.target.classList.contains('nav-link') || e.target.href.includes('pages/') || e.target.href.includes('booking.php'))) {
+    if (e.target.tagName === 'A' && (e.target.classList.contains('nav-link') || e.target.href.includes('pages/') || e.target.href.includes('booking.php')) && !e.target.href.includes('admin-')) {
       e.preventDefault();
       let url = e.target.href;
       if (!url.includes('?')) url += '?ajax=1';
@@ -61,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => console.error('Error loading page:', err));
   });
+  */
 });
 
 // LocalStorage helper functions

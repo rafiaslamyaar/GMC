@@ -33,8 +33,42 @@ function sendPendingEmail($toEmail, $userName, $program, $date, $time) {
         $mail->isHTML(true);
         $mail->Subject = 'Bevestiging: Je aanvraag voor ' . $program;
         
-        $formattedDate = date('d-m-Y', strtotime($date));
-        $mail->Body = "Je boeking voor $program op $formattedDate is ontvangen.";
+       $formattedDate = date('d-m-Y', strtotime($date));
+
+        // De professionele HTML Body
+        $mail->Body = "
+            <div style='background-color: #f4f4f4; padding: 40px 0; font-family: Arial, sans-serif;'>
+                <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1);'>
+                    
+                    <div style='background-color: #1a1a1a; padding: 20px; text-align: center;'>
+                        <h1 style='color: #e8580a; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;'>
+                            Mark Cox Training
+                        </h1>
+                    </div>
+
+                    <div style='padding: 30px; color: #333333;'>
+                        <h2 style='color: #1a1a1a; margin-top: 0;'>Aanvraag Ontvangen</h2>
+                        <p>Beste <strong>$userName</strong>,</p>
+                        <p>Bedankt voor je interesse in Mark Cox Training. We hebben je aanvraag voor een trainingssessie succesvol ontvangen.</p>
+                        
+                        <div style='background-color: #f9f9f9; border-left: 4px solid #e8580a; padding: 15px; margin: 20px 0;'>
+                            <p style='margin: 5px 0;'><strong>Programma:</strong> $program</p>
+                            <p style='margin: 5px 0;'><strong>Datum:</strong> $formattedDate</p>
+                            <p style='margin: 5px 0;'><strong>Tijdstip:</strong> $time uur</p>
+                        </div>
+
+                        <p>Mark zal je aanvraag persoonlijk beoordelen. Je ontvangt binnen 24 uur een definitieve bevestiging of een voorstel voor een ander tijdstip indien nodig.</p>
+                        
+                        <p>Heb je in de tussentijd vragen? Beantwoord dan gerust deze e-mail.</p>
+                    </div>
+
+                    <div style='background-color: #f4f4f4; padding: 20px; text-align: center; color: #777777; font-size: 12px;'>
+                        <p style='margin: 0;'>&copy; " . date('Y') . " Mark Cox Training. Alle rechten voorbehouden.</p>
+                        <p style='margin: 5px 0;'>Locatie: ROC Midden Nederland</p>
+                    </div>
+                </div>
+            </div>
+        ";
 
         return $mail->send();
     } catch (Exception $e) {
