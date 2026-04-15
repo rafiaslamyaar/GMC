@@ -6,7 +6,7 @@ include "../includes/header.php";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Over Mark Cox - Personal Trainer Amsterdam</title>
+  <title>Over Mark Cox - Personal Trainer Soesterberg</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,10 +23,6 @@ include "../includes/header.php";
         JOUW COACH,<br>
         JOUW <span class="highlight">KAMPIOEN</span>
       </h1>
-      <p style="color: rgba(255, 255, 255, 0.5); max-width: 700px; font-size: 1.05rem; line-height: 1.7;">
-        15 jaar levens transformeren met deskundige personal training,
-        wetenschappelijk onderbouwde methodes en onverzettelijke inzet voor jouw succes.
-      </p>
     </div>
   </section>
 
@@ -44,11 +40,11 @@ include "../includes/header.php";
             Passie ontmoet <span class="highlight">Expertise</span>
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.8;">
-            Mark Cox begon meer dan 15 jaar geleden met één doel: mensen helpen hun potentieel te benutten.
-            Wat begon als passie werd een roeping.
+            <!-- aanpasssen -->
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
           </p>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.8;">
-            Vanuit Amsterdam heeft Mark met meer dan 500 cliënten gewerkt — van beginners tot topsporters.
+            Vanuit Soesterberg heeft Mark met vele cliënten gewerkt — van beginners tot topsporters.
             Zijn aanpak combineert moderne sportwetenschap met echte betrokkenheid bij jouw reis.
           </p>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem; line-height: 1.8;">
@@ -60,46 +56,9 @@ include "../includes/header.php";
     </div>
   </section>
 
-  <!-- Values -->
-  <section style="background-color: #111111;">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Mijn filosofie</div>
-        <h2>KERN <span class="highlight">WAARDEN</span></h2>
-      </div>
-      
-      <div class="grid grid-3">
-        <div class="card">
-          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
-          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Resultaatgericht</h3>
-          <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.7;">
-            Elk programma is ontworpen voor jouw specifieke doelen. Geen standaardoplossingen —
-            alleen bewezen strategieën op maat.
-          </p>
-        </div>
-        
-        <div class="card">
-          <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔬</div>
-          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Wetenschappelijk onderbouwd</h3>
-          <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.7;">
-            Trainingsmethodes gebaseerd op de laatste sportwetenschap en voedingsonderzoek.
-            Slim trainen levert betere resultaten.
-          </p>
-        </div>
-        
-        <div class="card">
-          <div style="font-size: 2.5rem; margin-bottom: 1rem;">💪</div>
-          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Holistische aanpak</h3>
-          <p style="color: rgba(255, 255, 255, 0.6); line-height: 1.7;">
-            Fitness, voeding, mindset en herstel werken samen voor duurzame, langdurige verandering.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  
   <!-- Certifications -->
-  <section style="background-color: #0c0c0c;">
+  <!-- <section style="background-color: #0c0c0c;">
     <div class="container">
       <div class="section-header">
         <div class="section-label">Certificeringen</div>
@@ -142,7 +101,7 @@ include "../includes/header.php";
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- CTA -->
   <section class="stats" style="padding: 6rem 0;">
