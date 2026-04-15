@@ -18,6 +18,7 @@ include "../includes/header.php";
       border-radius: 1rem;
       padding: 2rem;
       transition: all 0.3s;
+      height: 100%;
     }
     
     .program-card:hover {
@@ -61,6 +62,12 @@ include "../includes/header.php";
       font-weight: 700;
       font-size: 1.1rem;
     }
+    .ontwerp {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin: 4rem 0 2rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -81,6 +88,11 @@ include "../includes/header.php";
     </div>
   </section>
 
+
+  <h1 class="ontwerp">Personal of duo training in studio</h1>  <p style="color: rgba(255, 255, 255, 0.6); text-align: center; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+    Persoonlijke trainingssessies volledig afgestemd op jouw doelen, niveau en agenda. Werk één-op-één of samen met een partner
+    in een professionele studio-omgeving voor optimale resultaten.
+  </p>
   <!-- Programs -->
   <section style="background-color: #0c0c0c;">
     <div class="container">
@@ -89,12 +101,32 @@ include "../includes/header.php";
         <!-- Program 1: Personal Training -->
         <div class="program-card">
           <div style="margin-bottom: 1.5rem;">
+            
+          </div>
+          <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
+            1 x per week
+          </h2>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
+            Volledig aangepaste trainingssessies op jouw niveau, doelen en agenda.
+            Werk direct met Mark voor maximale resultaten en verantwoordelijkheid.
+          </p>
+          <div class="price-tag">€85 / sessie</div>
+          
+          <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
+            BOEK NU
+          </a>
+        </div>
+
+
+        <!-- Program 2: Personal Training -->
+        <div class="program-card">
+          <div style="margin-bottom: 1.5rem;">
             <span style="display: inline-block; background-color: rgba(232, 88, 10, 0.2); color: #e8580a; padding: 0.35rem 0.75rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
               Meest populair
             </span>
           </div>
           <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
-            1-op-1 Personal Training
+            2 x per week
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
             Volledig aangepaste trainingssessies op jouw niveau, doelen en agenda.
@@ -102,168 +134,96 @@ include "../includes/header.php";
           </p>
           <div class="price-tag">€75 / sessie</div>
           
-          <ul class="features-list">
-            <li>Een-op-een coaching met Mark</li>
-            <li>Gepersonaliseerde trainingsschema's</li>
-            <li>Techniek- en houdingcorrectie</li>
-            <li>Voortgangscontrole en aanpassingen</li>
-            <li>Voedingsadvies inbegrepen</li>
-            <li>Flexibele planning</li>
-          </ul>
-          
           <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
             BOEK NU
           </a>
         </div>
 
-        <!-- Program 2: Outdoor Bootcamp -->
+
+        <!-- Program 3: Personal Training -->
         <div class="program-card">
-          <div style="margin-bottom: 1.5rem; height: 28px;"></div>
+          <div style="margin-bottom: 1.5rem;">
+           
+          </div>
           <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
-            Outdoor Bootcamp
+            3 x per week
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
-            Energierijke groepstrainingen in mooie parken van Amsterdam. Leuk, uitdagend en effectief met een positieve sfeer.
+            Volledig aangepaste trainingssessies op jouw niveau, doelen en agenda.
+            Werk direct met Mark voor maximale resultaten en verantwoordelijkheid.
           </p>
-          <div class="price-tag">€30 / sessie</div>
-          
-          <ul class="features-list">
-            <li>Kleine groepen (maximaal 8 personen)</li>
-            <li>Buitensessies in Amsterdamse parken</li>
-            <li>Functionele full-body training</li>
-            <li>Alle fitnessniveaus welkom</li>
-            <li>Motiverende groepsdynamiek</li>
-            <li>Weerbestendige workouts</li>
-          </ul>
+          <div class="price-tag">€70 / sessie</div>
           
           <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
             BOEK NU
           </a>
         </div>
-
-        <!-- Program 3: Strength & Performance -->
-        <div class="program-card">
-          <div style="margin-bottom: 1.5rem; height: 28px;"></div>
-          <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
-            Kracht & Prestaties
-          </h2>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
-            Geavanceerd programma voor atleten en ervaren krachtsporters die maximale kracht en prestaties willen halen.
-          </p>
-          <div class="price-tag">€90 / sessie</div>
-          
-          <ul class="features-list">
-            <li>Sportgerichte trainingsprogramma's</li>
-            <li>Geavanceerde krachtprotocolen</li>
-            <li>Kracht- en explosiviteitstraining</li>
-            <li>Prestatiemeting & analyse</li>
-            <li>Hersteloptimalisatie</li>
-            <li>Ondersteuning bij wedstrijdvoorbereiding</li>
-          </ul>
-          
-          <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
-            BOEK NU
-          </a>
+        <div style="display: block;"></div>
+        <h1 class="ontwerp">Small Group Training</h1>
+        <
         </div>
-
-        <!-- Program 4: Nutrition Coaching -->
+      </div>
+        <div class="container">
+      <div class="grid grid-2" style="gap: 2rem;">
+        <!-- Program 4: Group Training -->
         <div class="program-card">
           <div style="margin-bottom: 1.5rem; height: 28px;"></div>
           <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
-            Voedingscoaching
+            1 x per week
           </h2>
           <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
-            Op maat gemaakte maaltijdplannen en voedingsstrategieën om je doelen te ondersteunen.
-            Leer je lichaam optimaal te voeden.
+            Dynamische groepstrainingen in kleine groepen van max 4 personen voor een motiverende en sociale workout-ervaring.
+            Train samen met anderen terwijl je werkt aan je persoonlijke doelen.
           </p>
           <div class="price-tag">€150 / maand</div>
           
-          <ul class="features-list">
-            <li>Persoonlijke maaltijdplannen</li>
-            <li>Macro- en calorieberekeningen</li>
-            <li>Wekelijkse check-ins & aanpassingen</li>
-            <li>Supplementadvies</li>
-            <li>Recepten & mealprep-tips</li>
-            <li>Doorlopende WhatsApp-ondersteuning</li>
-          </ul>
+          
           
           <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
             BOEK NU
           </a>
         </div>
 
-      </div>
-    </div>
-  </section>
 
-  <!-- Packages -->
-  <section style="background-color: #111111;">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Bespaar meer</div>
-        <h2>SESSIE <span class="highlight">PAKKETTEN</span></h2>
-        <p style="color: rgba(255, 255, 255, 0.5); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-          Zet in op je transformatie en bespaar met pakketten met meerdere sessies.
-        </p>
-      </div>
-      
-      <div class="grid grid-3">
-        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
-          <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem;">STARTER</h3>
-          <div style="font-size: 2.5rem; font-weight: 800; color: #e8580a; margin-bottom: 0.5rem;">€350</div>
-          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; margin-bottom: 2rem;">5 sessies</p>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem;">
-            Perfect om personal training uit te proberen
+        <!-- Program 5: Group Training -->
+        <div class="program-card">
+          <div style="margin-bottom: 1.5rem; height: 28px;"></div>
+          <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
+            2 x per week
+          </h2>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
+            Dynamische groepstrainingen in kleine groepen van max 4 personen voor een motiverende en sociale workout-ervaring.
+            Train samen met anderen terwijl je werkt aan je persoonlijke doelen.
           </p>
-          <ul style="list-style: none; text-align: left; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-bottom: 2rem;">
-            <li style="padding: 0.5rem 0;">✓ €70 per sessie</li>
-            <li style="padding: 0.5rem 0;">✓ Geldig 6 weken</li>
-            <li style="padding: 0.5rem 0;">✓ Flexibele planning</li>
-          </ul>
-          <a href="booking.php" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-            STARTEN
+          <div class="price-tag">€140 / maand</div>
+          
+          
+          
+          <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
+            BOEK NU
           </a>
         </div>
-        
-        <div class="card" style="text-align: center; padding: 2.5rem 2rem; border-color: #e8580a; position: relative;">
-          <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background-color: #e8580a; color: white; padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700;">
-            BESTE WAARDE
-          </div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem;">TRANSFORMEREN</h3>
-          <div style="font-size: 2.5rem; font-weight: 800; color: #e8580a; margin-bottom: 0.5rem;">€650</div>
-          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; margin-bottom: 2rem;">10 sessies</p>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem;">
-            Populairste keuze voor serieuze resultaten
+
+
+        <!-- Program 6: Group Training -->
+        <div class="program-card">
+          <div style="margin-bottom: 1.5rem; height: 28px;"></div>
+          <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
+            3 x perweek
+          </h2>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem; line-height: 1.7;">
+            Dynamische groepstrainingen in kleine groepen van max 4 personen voor een motiverende en sociale workout-ervaring.
+            Train samen met anderen terwijl je werkt aan je persoonlijke doelen.
           </p>
-          <ul style="list-style: none; text-align: left; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-bottom: 2rem;">
-            <li style="padding: 0.5rem 0;">✓ €65 per sessie</li>
-            <li style="padding: 0.5rem 0;">✓ Geldig 12 weken</li>
-            <li style="padding: 0.5rem 0;">✓ Prioriteitsplanning</li>
-            <li style="padding: 0.5rem 0;">✓ Gratis maaltijdplan</li>
-          </ul>
-          <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center;">
-            STARTEN
+          <div class="price-tag">€130 / maand</div>
+          
+          
+          
+          <a href="booking.php" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1.5rem;">
+            BOEK NU
           </a>
         </div>
-        
-        <div class="card" style="text-align: center; padding: 2.5rem 2rem;">
-          <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem;">ELITE</h3>
-          <div style="font-size: 2.5rem; font-weight: 800; color: #e8580a; margin-bottom: 0.5rem;">€1200</div>
-          <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem; margin-bottom: 2rem;">20 sessies</p>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1.5rem;">
-            Ultieme inzet voor transformatie
-          </p>
-          <ul style="list-style: none; text-align: left; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-bottom: 2rem;">
-            <li style="padding: 0.5rem 0;">✓ €60 per sessie</li>
-            <li style="padding: 0.5rem 0;">✓ Geldig 24 weken</li>
-            <li style="padding: 0.5rem 0;">✓ VIP planning</li>
-            <li style="padding: 0.5rem 0;">✓ Volledig voedingsprogramma</li>
-            <li style="padding: 0.5rem 0;">✓ 24/7 WhatsApp-ondersteuning</li>
-          </ul>
-          <a href="booking.php" class="btn btn-secondary" style="width: 100%; justify-content: center;">
-            STARTEN
-          </a>
-        </div>
+
       </div>
     </div>
   </section>
@@ -273,13 +233,11 @@ include "../includes/header.php";
     <div class="container">
       <div style="max-width: 800px; margin: 0 auto; text-align: center;">
         <h2 style="font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1.25rem;">
-          WEET JE NIET WELK PROGRAMMA BIJ JE PAST?
+      Klaar om te trainen ? boek nu !
         </h2>
-        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; margin-bottom: 2.5rem;">
-          Boek een gratis consult van 30 minuten om je doelen te bespreken en de beste keuze te vinden.
-        </p>
+      
         <a href="booking.php" class="btn" style="background-color: white; color: #e8580a;">
-          BOEK GRATIS CONSULT →
+          BOEK een CONSULT →
         </a>
       </div>
     </div>

@@ -219,11 +219,12 @@ try {
               <label class="form-label">Programma *</label>
               <select class="form-select" id="programInput" required>
                 <option value="" disabled selected>Kies een programma</option>
-                <option value="1-op-1 Personal Training">1-op-1 Personal Training</option>
-                <option value="Outdoor Bootcamp">Outdoor Bootcamp</option>
-                <option value="Kracht & Prestaties">Kracht & Prestaties</option>
-                <option value="Voedingscoaching">Voedingscoaching</option>
-                <option value="Gratis consult">Gratis consult</option>
+                <option value="Personal Training - 1x per week">Personal Training - 1x per week</option>
+                <option value="Personal Training - 2x per week">Personal Training - 2x per week</option>
+                <option value="Personal Training - 3x per week">Personal Training - 3x per week</option>
+                <option value="Group Training - 1x per week">Group Training - 1x per week</option>
+                <option value="Group Training - 2x per week">Group Training - 2x per week</option>
+                <option value="Group Training - 3x per week">Group Training - 3x per week</option>
               </select>
             </div>
             

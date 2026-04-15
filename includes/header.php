@@ -14,7 +14,7 @@
 <body>
     <header>
     <div class="navbar">
-      <a href="index.html" class="logo">
+      <a href="../index.php" class="logo">
         <div class="logo-icon">
           
           <img src="../images/markcox-logo.png" alt="Mark Cox Training">

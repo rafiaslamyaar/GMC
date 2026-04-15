@@ -34,7 +34,7 @@ include "../includes/header.php";
     <div class="container">
       <div class="grid grid-2" style="gap: 4rem; align-items: center;">
         <div>
-          <img src="https://images.unsplash.com/photo-1669504243706-1df1f8d5dacd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" 
+          <img src="../images/markcox-image.webp" 
                alt="Mark Cox" 
                style="width: 100%; border-radius: 1rem; aspect-ratio: 4/5; object-fit: cover;">
         </div>
@@ -42,19 +42,16 @@ include "../includes/header.php";
           <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem;">
             Passie ontmoet <span class="highlight">Expertise</span>
           </h2>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.8;">
-            Mark Cox begon meer dan 15 jaar geleden met één doel: mensen helpen hun potentieel te benutten.
-            Wat begon als passie werd een roeping.
+          
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
+            Ik ben geboren en getogen in Zeist waar ik in mijn jeugd bij hockey club Schaerweijde en tennis club Shot heb gespeeld. Eigenlijk staat mijn hele leven in het teken van sporten en een gezonde levensstijl. Ik heb een tijd gereisd en veel ervaringen opgedaan. Inmiddels woon ik weer in de omgeving van Zeist en heb mijn eigen gym ingericht waar ik met veel plezier aan het werk ben om iedereen die dat wil te motiveren en te begeleiden.
           </p>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem; line-height: 1.8;">
-            Vanuit Amsterdam heeft Mark met meer dan 500 cliënten gewerkt — van beginners tot topsporters.
-            Zijn aanpak combineert moderne sportwetenschap met echte betrokkenheid bij jouw reis.
+          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem;">
+            Opgeleid en gespecialiseerd in Fitness Nutrition, Kracht en Conditie training en Corrective Excercises. Graag deel ik mijn ervaringen met jou, om dagelijks met heel veel plezier, effectief en efficiënt te bewegen.
           </p>
-          <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 2rem; line-height: 1.8;">
-            Fitness gaat niet alleen om fysieke verandering — het gaat om vertrouwen, discipline
-            en een levensstijl die je grootste doelen ondersteunt.
-          </p>
-        </div>
+          
+        
+        
       </div>
     </div>
   </section>
@@ -150,11 +147,9 @@ include "../includes/header.php";
         <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.25rem;">
           KLAAR OM SAMEN TE WERKEN?
         </h2>
-        <p style="color: rgba(255, 255, 255, 0.8); font-size: 1rem; margin-bottom: 2.5rem;">
-          Laten we iets geweldigs opbouwen. Boek je gratis consult en ontdek wat je echt kunt.
-        </p>
+        
         <a href="booking.php" class="btn" style="background-color: white; color: #e8580a;">
-          BOEK GRATIS CONSULT →
+          BOEK een CONSULT →
         </a>
       </div>
     </div>

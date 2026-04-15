@@ -13,7 +13,7 @@
           </a>
           <p class="text-footer">
             Professionele personal training in Nederland.
-            Lichamen en geesten transformeren sinds 2010.
+          
           </p>
           
         </div>
@@ -31,9 +31,9 @@
         <div class="contact">
           <h4>Contact</h4>
           <ul>
-            <li>📞 +31 6 12 34 56 78</li>
-            <li>✉️ info@markcoxtraining.nl</li>
-            <li>📍 Amsterdam, Nederland</li>
+            <li>📞 +31 6 121 971 66</li>
+            <li>✉️ markcoxtraining@gmail.com</li>
+            <li>📍 Postweg 55C, Soesterberg</li>
           </ul>
         </div>
       </div>
