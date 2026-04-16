@@ -19,6 +19,7 @@ foreach ($required as $field) {
 
 $id = intval($_POST['id']);
 $status = $_POST['status'];
+$reason = trim($_POST['reason'] ?? '');
 $validStatuses = ['pending', 'confirmed', 'cancelled'];
 
 if (!in_array($status, $validStatuses, true)) {
@@ -45,10 +46,7 @@ try {
         exit;
     }
 
-    // Send confirmation email if booking is confirmed
-    if ($status === 'confirmed') {
-        sendConfirmedEmail($booking['email'], $booking['name'], $booking['program'], $booking['date'], $booking['time']);
-    }
+    
 
     echo json_encode(['success' => true]);
 } catch (PDOException $e) {

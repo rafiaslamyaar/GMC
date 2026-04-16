@@ -121,9 +121,7 @@ include "../includes/header.php";
         <!-- Program 2: Personal Training -->
         <div class="program-card">
           <div style="margin-bottom: 1.5rem;">
-            <span style="display: inline-block; background-color: rgba(232, 88, 10, 0.2); color: #e8580a; padding: 0.35rem 0.75rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
-              Meest populair
-            </span>
+            
           </div>
           <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem;">
             2 x per week

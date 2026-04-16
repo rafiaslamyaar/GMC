@@ -239,9 +239,7 @@ try {
               </button>
               <button type="submit" class="btn btn-primary" style="flex: 2;">
                 BEVESTIG BOEKING ✓
-              </button>
-              <a href="admin-calendar.php" class="btn btn-secondary">Admin Calendar</a>
-
+              
             </div>
           </form>
         </div>

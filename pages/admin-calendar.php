@@ -131,18 +131,13 @@ try {
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 0.75rem;">
       <div>
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">
-          ADMIN <span class="highlight">KALENDER</span>
+          ADMIN <span class="highlight">DASHBOARD</span>
         </h1>
         <p style="color: rgba(255, 255, 255, 0.5);">
           Blokkeer datums wanneer je niet beschikbaar bent
         </p>
       </div>
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <a href="admin-bookings.php" class="btn btn-primary" style="padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; justify-content: center;">BOEKINGEN</a>
-        <button onclick="logout()" class="btn btn-secondary" style="padding: 0.75rem 1.5rem;">
-          UITLOGGEN
-        </button>
-      </div>
+      
     </div>
     
     <!-- Calendar -->
@@ -185,6 +180,17 @@ try {
       <div id="blockedDatesList">
         <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
           Nog geen geblokkeerde datums. Klik in de kalender om een datum te blokkeren.
+        </p>
+      </div>
+    </div>
+
+    <div class="blocked-dates-list" style="margin-top: 2rem;">
+      <h3 style="font-weight: 700; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+        <span>Boekingen</span>
+      </h3>
+      <div id="bookingsList">
+        <p style="text-align: center; color: rgba(255, 255, 255, 0.3); padding: 2rem 0;">
+          Log in om de boekingen te beheren.
         </p>
       </div>
     </div>

@@ -39,6 +39,13 @@ try {
         exit;
     }
 
+    $allowedTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+    if (!in_array($time, $allowedTimes, true)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'Kies een tijd tussen 09:00 en 16:00']);
+        exit;
+    }
+
     $bookingStmt = $pdo->prepare('SELECT 1 FROM bookings WHERE date = ? AND time = ? AND status <> "cancelled"');
     $bookingStmt->execute([$date, $time]);
     if ($bookingStmt->fetchColumn()) {
@@ -51,9 +58,12 @@ try {
     $insertStmt->execute([$name, $email, $phone, $program, $notes, $date, $time]);
 
     // Send pending email to customer
-    sendPendingEmail($email, $name, $program, $date, $time);
+    $emailSent = sendPendingEmail($email, $name, $program, $date, $time);
+    if (!$emailSent) {
+        error_log("Booking email failed for {$email} on {$date} {$time}");
+    }
 
-    echo json_encode(['success' => true]);
+    echo json_encode(['success' => true, 'emailSent' => $emailSent]);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Serverfout: ' . $e->getMessage()]);

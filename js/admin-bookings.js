@@ -32,9 +32,19 @@ function formatDateDisplay(date) {
 }
 
 async function updateBookingStatus(bookingId, newStatus) {
+  let reason = '';
+  if (newStatus === 'cancelled') {
+    const promptValue = prompt('Wat is de reden van annulering? (optioneel)');
+    if (promptValue === null) {
+      return false;
+    }
+    reason = promptValue.trim();
+  }
+
   const formData = new FormData();
   formData.append('id', bookingId);
   formData.append('status', newStatus);
+  formData.append('reason', reason);
 
   const response = await fetch('../pages/admin-booking-update.php', {
     method: 'POST',

@@ -53,51 +53,7 @@ include "../includes/header.php";
   </section>
 
   
-  <!-- Certifications -->
-  <!-- <section style="background-color: #0c0c0c;">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">Certificeringen</div>
-        <h2>VERBANDEN & <span class="highlight">EXPERTISE</span></h2>
-      </div>
-      
-      <div style="max-width: 900px; margin: 0 auto;">
-        <div class="grid grid-2">
-          <div class="card" style="text-align: center; padding: 2rem;">
-            <div style="font-size: 2rem; margin-bottom: 1rem;">🏆</div>
-            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">NASM Gecertificeerd Personal Trainer</h4>
-            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
-              National Academy of Sports Medicine
-            </p>
-          </div>
-          
-          <div class="card" style="text-align: center; padding: 2rem;">
-            <div style="font-size: 2rem; margin-bottom: 1rem;">🥗</div>
-            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Sports Nutrition Specialist</h4>
-            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
-              Precision Nutrition Niveau 1
-            </p>
-          </div>
-          
-          <div class="card" style="text-align: center; padding: 2rem;">
-            <div style="font-size: 2rem; margin-bottom: 1rem;">💪</div>
-            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Strength & Conditioning</h4>
-            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
-              CSCS Gecertificeerd
-            </p>
-          </div>
-          
-          <div class="card" style="text-align: center; padding: 2rem;">
-            <div style="font-size: 2rem; margin-bottom: 1rem;">🩺</div>
-            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Revalidatietraining</h4>
-            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.85rem;">
-              Blessurepreventie & herstel
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
+  
 
   <!-- CTA -->
   <section class="stats" style="padding: 6rem 0;">
