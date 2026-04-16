@@ -1,0 +1,8 @@
+# Voorkom dat mensen je .env bestand kunnen zien
+<Files .env>
+Order allow,deny
+Deny from all
+</Files>
+
+# Voorkom dat mensen je vendor map inkijken
+RewriteRule ^vendor(/|$) - [F,L]

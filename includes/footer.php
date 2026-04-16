@@ -3,7 +3,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a href="../index.php" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
+          <a href="../pages/Home.php" class="logo" style="margin-bottom: 1rem; display: inline-flex;">
             <div class="logo-icon">
               <img src="../images/markcox-logo.png" alt="Mark Cox Training">
             </div>
@@ -20,7 +20,7 @@
         <div class="quick-links">
           <h4>Snelle links</h4>
           <ul>
-            <li><a href="../index.php">Home</a></li>
+            <li><a href="../pages/Home.php">Home</a></li>
             <li><a href="../pages/about.php">Over Mark</a></li>
             <li><a href="../pages/services.php">Trainingsprogramma's</a></li>
             <li><a href="../pages/booking.php">Plan een sessie</a></li>
